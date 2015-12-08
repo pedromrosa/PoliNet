@@ -105,7 +105,16 @@
                             <td>Descri&ccedil;&atilde;o: desc2 </td>
                        </tr>
                     </table>
-
+                    
+                   <!--ALTERADO-->
+                    <%  if(nusp.equals(nusp_logado)){
+                        
+                        %>
+                        <!--BOTÃO DE EDITAR PERFIL-->
+                    <form><INPUT type="submit" class="formbutton" formaction="editPerfilAluno.jsp" value="Editar Perfil"></form>
+                    <% } 
+                    	%>
+                    	
                 </fieldset>
                     <br/>
 
