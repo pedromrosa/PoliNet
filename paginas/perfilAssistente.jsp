@@ -1,20 +1,20 @@
 <%-- 
-    Document   : aluno
-    Created on : Dec 3, 2015, 2:57:13 PM
+    Document   : perfilAssistente
+    Created on : Dec 8, 2015, 3:57:32 PM
     Author     : Gregorio
 --%>
 
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 
-<%@ page import="transacoes.Aluno"  %>
-<%@ page import="data.AlunoDO"      %>
+<%@ page import="transacoes.Assistente"  %>
+<%@ page import="data.AssistenteDO"      %>
 
 <!DOCTYPE html>
 <html>
     <head>
         <link rel="stylesheet" href="CSS/styles.css" type="text/css" />
         <meta http-equiv="Content-Type" content="text/htm l;charset=UTF-8">
-        <title>Perfil de aluno</title>
+        <title>Perfil de assistente</title>
     </head>
     
     <body>
@@ -42,18 +42,18 @@
     String userId = request.getParameter("UserId");
     int id = Integer.parseInt(userId);
 
-    transacoes.Aluno al = new transacoes.Aluno();
-    data.AlunoDO aluno = al.buscar(id);
+    transacoes.Assistente as = new transacoes.Assistente();
+    data.AssistenteDO assistente = as.buscar(id);
     
-    // atualiza atributos do aluno de id UserID
-    String nusp         = aluno.getNusp(); 
-    String email        = aluno.getEmail();
-    String nome         = aluno.getNome();  
-    String sobrenome    = aluno.getSobrenome();
-    String link_lattes  = aluno.getLattes();
-    String instituicao  = aluno.getInstituicao();
-    String codigo_CV    = aluno.getCv();
-    String codigo_Hist  = aluno.getHist();
+    // atualiza atributos do assistente de id UserID
+    String nusp         = assistente.getNusp(); 
+    String email        = assistente.getEmail();
+    String nome         = assistente.getNome();  
+    String sobrenome    = assistente.getSobrenome();
+    String link_lattes  = assistente.getLattes();
+    String instituicao  = assistente.getInstituicao();
+    String departamento = assistente.getDepartamento();
+    String laboratorio  = assistente.getLaboratorio();
     
 %>
         <section id="body" class="width">
@@ -70,7 +70,7 @@
                     <li><a href="index.jsp">Home</a></li>
                     <li class="selected-item"><a href="#">Perfil</a></li>
                     <li><a href="pesquisa.jsp">Pesquisa</a></li>
-                    <li><a href="login.jsp?UserId=<%=userId%>&acao=logout">Logout</a></li>
+                    <li><a href="login.jsp">Logout</a></li>
                     <li><a href="sobreNos.jsp">Sobre n&oacute;s</a></li>
                 </ul> </nav>
             </aside>
@@ -83,12 +83,14 @@
 				
                     <h1>Nome completo: <%= nome +" "+ sobrenome %></h1>
                     <p>
+                    <p2>E-mail: <%= email %> <br /></p2>   
                     <p2>Institui&ccedil;&atilde;o: <%= instituicao %> <br /></p2>
                     <p2>Descri&ccedil;&atilde;o do usu&aacute;rio: atolado de trabalhos <br />
                     <p2>N&uacute;mero USP: <%= nusp %> <br /></p2>
                     <p2>Link Currículo Lattes: <%= link_lattes %> <br /></p2>
-<!--                    <p2>Código CV: <%= codigo_CV %> Código Histórico: <%= codigo_Hist %> <br /></p2>-->
-                    <p2>E-mail: <%= email %> <br /></p2>   
+                    <p2>Instituição: <%= instituicao %> <br /></p2>
+                    <p2>Departamento: <%= departamento %> <br /></p2>   
+                    <p2>Laboratório: <%= laboratorio %> <br /></p2>   
                     </p>		
 
         	</article>

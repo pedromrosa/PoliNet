@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : login
     Created on : 29/11/2015, 11:08:37
     Author     : Humberto
@@ -48,14 +48,14 @@
             } else {    // Caso login seja valido
 
                 session.setAttribute("nusp_logado", nusp);
-                
-                if ("aluno".equals(usuario.getVinculo())) {
-                    response.sendRedirect("perfilAluno.jsp?UserId=" + usuario.getId());
-                } else { if ("professor".equals(usuario.getVinculo())) {
-                    response.sendRedirect("perfilProfessor.jsp?UserId=" + usuario.getId());
-                }
-//                pageContext.forward("sobreNos.jsp");    // caso nenhum dos outros
-                } // fim - else 
+                response.sendRedirect("visualizarPerfil.jsp?UserId=" + usuario.getId());
+//                if ("aluno".equals(usuario.getVinculo())) {
+//                    response.sendRedirect("perfilAluno.jsp?UserId=" + usuario.getId());
+//                } else { if ("professor".equals(usuario.getVinculo())) {
+//                    response.sendRedirect("perfilProfessor.jsp?UserId=" + usuario.getId());
+//                }
+////                pageContext.forward("sobreNos.jsp");    // caso nenhum dos outros
+//                } // fim - else 
             }
         }
     }

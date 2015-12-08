@@ -1,5 +1,5 @@
 <%-- 
-    Document   : VizualizarPerfil       CLASSE MORTA!!!!!!!!!
+    Document   : VizualizarPerfil       
     Created on : Dec 6, 2015, 9:28:23 PM
     Author     : Gregorio
 --%>
@@ -36,7 +36,7 @@
                 }
                 else { if ("assistente".equals(vinculo)) {
                     session.setAttribute("nusp_logado", nusp_logado);
-                    pageContext.forward("usuario.jsp");
+                    pageContext.forward("perfilAssistente.jsp");
                 }
                 else {  // se nao for nenhum deles
                     %>

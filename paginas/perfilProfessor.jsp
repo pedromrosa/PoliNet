@@ -14,8 +14,10 @@
     <head>
         <link rel="stylesheet" href="CSS/styles.css" type="text/css" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Perfil de professor</title>
     </head>
+    
+    <body>
 <%
     // Verificacao do usuario logado
     String nusp_logado = (String)session.getAttribute("nusp_logado");
@@ -36,7 +38,7 @@
 //        
 //    }
 
-    // Busca aluno por ID
+    // Busca usuario por ID
     String userId = request.getParameter("UserId");
     int id = Integer.parseInt(userId);
 

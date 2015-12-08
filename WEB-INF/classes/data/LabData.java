@@ -21,7 +21,13 @@ public class LabData {
      excluir(lab.getId(), tr);
   } // excluir
 
-  public void excluir (int idobj, Transacao tr) throws Exception {
+  public void excluir (int idobj, Transacao tr) throws Exception {  // Implementacao feita por PEDRO 
+    Connection con = tr.obterConexao();
+    String sql = "delete from lab where id=?";
+    PreparedStatement ps = con.prepareStatement(sql);
+    ps.setInt(1, idobj);
+    int result = ps.executeUpdate();
+    System.out.println("apagado com sucesso");
   } // excluir 
 
   public void atualizar(LabDO lab, Transacao tr) throws Exception {
@@ -73,4 +79,24 @@ public class LabData {
      return labs;
   } // pesquisarPorNome
 
+    public Vector pesquisarPorDep(String dep, Transacao tr) throws Exception {
+     Connection con = tr.obterConexao();
+     String sql = "select * from lab where departamento like ?";
+     PreparedStatement ps = con.prepareStatement(sql);
+     ps.setString(1, dep);
+     ResultSet rs = ps.executeQuery();
+     System.out.println("query executada");
+     Vector labs = new Vector();
+     while (rs.next()) {
+        LabDO l = new LabDO();
+        l.setId (rs.getInt("id"));
+        l.setNome (rs.getString("nome"));
+        l.setDepartamento (rs.getString("departamento"));
+        System.out.println(" got " + l.getDepartamento());
+        l.setDescricao (rs.getString("descricao"));
+        l.setSite (rs.getString("link_site"));
+        labs.add(l);
+     }
+     return labs;
+  } // pesquisarPorNome
 } // LabData

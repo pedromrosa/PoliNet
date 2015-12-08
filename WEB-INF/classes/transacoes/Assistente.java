@@ -10,14 +10,14 @@ import data.*;
 import java.util.*;
 /**
  *
- * @author Humberto
+ * @author Gregorio
  */
-public class Professor extends Usuario{
+public class Assistente extends Usuario{
     
-    public boolean incluir (ProfessorDO professor) throws Exception{
+    public boolean incluir (AssistenteDO assistente) throws Exception{
         
         // validacao das regras de negocio
-        if ( (isEmpty(professor.getNusp())) || (isEmpty(professor.getEmail())) || (isEmpty(professor.getNome())) || (isEmpty(professor.getSobrenome())) || (isEmpty(professor.getVinculo())) ) {
+        if ( (isEmpty(assistente.getNusp())) || (isEmpty(assistente.getEmail())) || (isEmpty(assistente.getNome())) || (isEmpty(assistente.getSobrenome())) || (isEmpty(assistente.getVinculo())) ) {
             return false;
         }
         
@@ -25,58 +25,58 @@ public class Professor extends Usuario{
         Transacao tr = new Transacao();
         try {
             tr.begin();
-            ProfessorData pdata = new ProfessorData();
-            pdata.incluir(professor, tr);
+            AssistenteData asdata = new AssistenteData();
+            asdata.incluir(assistente, tr);
             tr.commit();
             return true;
         } catch(Exception e) {
             tr.rollback();
-            System.out.println("erro ao incluir " + professor.getNusp());
+            System.out.println("erro ao incluir " + assistente.getNusp());
             e.printStackTrace();
         }
         return false;
     }
-    public boolean atualizar(ProfessorDO professor) throws Exception {
+    public boolean atualizar(AssistenteDO assistente) throws Exception {
         Transacao tr = new Transacao();
         try {
             // inserir validacoes de regras de negocio
             tr.begin();
-            ProfessorData pdata = new ProfessorData();
-            pdata.atualizar(professor, tr);
+            AssistenteData asdata = new AssistenteData();
+            asdata.atualizar(assistente, tr);
             tr.commit();
             return true;
         } catch (Exception e) {
             tr.rollback();
-            System.out.println("erro ao atualizar " + professor.getNusp());
+            System.out.println("erro ao atualizar " + assistente.getNusp());
             e.printStackTrace();
         }
         return false;
     }
-    public boolean excluir(ProfessorDO professor) throws Exception {
+    public boolean excluir(AssistenteDO assistente) throws Exception {
         Transacao tr = new Transacao();
         try {
             // inserir validacoes de regras de negocio
             tr.begin();
-            ProfessorData pdata = new ProfessorData();
-            pdata.excluir(professor, tr);
+            AssistenteData asdata = new AssistenteData();
+            asdata.excluir(assistente, tr);
             tr.commit();
             return true;
         } catch (Exception e) {
             tr.rollback();
-            System.out.println("erro ao excluir " + professor.getNusp());
+            System.out.println("erro ao excluir " + assistente.getNusp());
             e.printStackTrace();
         }
         return false;
     }
     @Override
-    public ProfessorDO buscar(int idobj) throws Exception{
+    public AssistenteDO buscar(int idobj) throws Exception{
         Transacao tr = new Transacao();
         try {
             tr.beginReadOnly();
-            ProfessorData pdata = new ProfessorData();
-            ProfessorDO professor = pdata.buscar(idobj, tr);
+            AssistenteData asdata = new AssistenteData();
+            AssistenteDO assistente = asdata.buscar(idobj, tr);
             tr.commit();
-            return professor;
+            return assistente;
         } catch (Exception e) {
             tr.rollback();
             System.out.println("erro ao buscar " + idobj);
@@ -84,14 +84,14 @@ public class Professor extends Usuario{
         }
         return null;
     }
-  public ProfessorDO buscarId(int id) throws Exception {
+  public AssistenteDO buscarId(int id) throws Exception {
       Transacao tr = new Transacao();
       try {
           tr.beginReadOnly();
-          ProfessorData pdata = new ProfessorData();
-          ProfessorDO professor   = pdata.buscar(id, tr);
+          AssistenteData asdata = new AssistenteData();
+          AssistenteDO assistente   = asdata.buscar(id, tr);
           tr.commit();
-          return professor;
+          return assistente;
       } catch (Exception e) {
           System.out.println("erro ao buscar ID: " + id);
           e.printStackTrace();
@@ -105,8 +105,8 @@ public class Professor extends Usuario{
      Transacao tr = new Transacao();
      try {
 	   tr.beginReadOnly();
-           ProfessorData pdata = new ProfessorData();
-           Vector v = pdata.pesquisarPorNusp(nusp, tr);
+           AssistenteData asdata = new AssistenteData();
+           Vector v = asdata.pesquisarPorNusp(nusp, tr);
 		 tr.commit();
 		 return v;
      } catch(Exception e) {
@@ -125,11 +125,11 @@ public class Professor extends Usuario{
   }
 
   public static void main(String[] args) {
-      Professor p = new Professor();
-      ProfessorDO professor = new ProfessorDO();
+      Assistente as = new Assistente();
+      AssistenteDO assistente = new AssistenteDO();
       try {
-	    professor = p.buscar(6);
-            System.out.println(professor.getNusp());
+	    assistente = as.buscar(6);
+            System.out.println(assistente.getNusp());
       } catch(Exception e) {
             e.printStackTrace();
       }
