@@ -29,6 +29,10 @@
                <td><input type="text" name="nusp" />
             </tr>
             <tr>
+               <td>Senha</td>
+               <td><input type="text" name="password" />
+            </tr>
+            <tr>
                <td>E-mail</td>
                <td><input type="text" name="email" />
             </tr>
@@ -59,21 +63,27 @@
 
 
 <%      String nusp = request.getParameter("nusp");
+        String senha = request.getParameter("password");
         String email = request.getParameter("email");
         String nome = request.getParameter("nome");
         String sobrenome = request.getParameter("sobrenome");
         String vinculo = request.getParameter("vinculo");
+        
         transacoes.Usuario tn = new transacoes.Usuario();
         data.UsuarioDO usuario = new data.UsuarioDO();
+        
         usuario.setNusp(nusp);
         usuario.setEmail(email);
         usuario.setNome(nome);
         usuario.setSobrenome(sobrenome);
         usuario.setVinculo(vinculo); 
+        usuario.setSenha(senha);
+        
         if ( tn.incluir(usuario)) {
           // avisar usuario que transacao foi feita com sucesso
 %>
           Transação realizada com sucesso!
+          Senha: <%= usuario.getSenha() %>
           <form action="./main.jsp" method="post">
              <input type="submit" name="voltar" value="Voltar" />
           </form>

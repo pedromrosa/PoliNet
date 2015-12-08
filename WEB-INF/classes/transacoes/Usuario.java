@@ -81,7 +81,24 @@ public class Usuario {
 	 }
 	 return null;
   } // buscar
-
+    
+    //--------PESQUISA DE PERFIL POR NOME-------- 18:30 07/12 -- Fuess
+     public Vector buscar(String nome) throws Exception{
+     Transacao tr = new Transacao();
+	 try{
+	   tr.beginReadOnly();
+  	     UsuarioData udata = new UsuarioData();
+	     Vector u = udata.pesquisarPorNome(nome, tr);
+	   tr.commit();
+	   return u;
+	 } catch (Exception e) {
+	   tr.rollback();
+	   System.out.println("erro ao buscar por nome");
+	   e.printStackTrace();
+	 }
+	 return null;
+  } // buscar
+    
   public Vector pesquisar(String nusp) {
      if ( isEmpty(nusp) )
         return null;
@@ -99,6 +116,41 @@ public class Usuario {
      }
      return null;
   } // pesquisar
+////----------PESQUISA POR NUSP-----------  18:30 07/12 --  Fuess -- passou de Vector para UsuarioDO
+//  public UsuarioDO pesquisar(String nusp) {
+//     if ( isEmpty(nusp) )
+//        return null;
+//
+//     Transacao tr = new Transacao();
+//     try {
+//	   tr.beginReadOnly();
+//           UsuarioData udata = new UsuarioData();
+//           UsuarioDO v = udata.pesquisarPorNusp(nusp, tr);
+//		 tr.commit();
+//		 return v;
+//     } catch(Exception e) {
+//         System.out.println("erro ao pesquisar " + nusp);
+//         e.printStackTrace();
+//     }
+//     return null;
+//  } // pesquisar
+
+  public UsuarioDO buscarNusp(String nusp) throws Exception{
+     Transacao tr = new Transacao();
+	 try{
+	   tr.beginReadOnly();
+  	     UsuarioData udata = new UsuarioData();
+	     UsuarioDO u = udata.buscarNusp(nusp, tr);
+	   tr.commit();
+	   return u;
+	 } catch (Exception e) {
+	   tr.rollback();
+	   System.out.println("erro ao buscar" + nusp);
+	   e.printStackTrace();
+	 }
+	 return null;
+  } // buscar
+  
 
   private boolean isEmpty(String s) {
      if (null == s)
@@ -107,6 +159,7 @@ public class Usuario {
        return true;
      return false;
   }
+ 
 
   public static void main(String[] args) {
       Usuario u = new Usuario();

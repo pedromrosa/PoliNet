@@ -87,11 +87,10 @@
 <%     if (action.equals("removeFromForm")) {
           int id = Integer.parseInt(request.getParameter("id"));
 %>        
-          Está certo disso?
           <form action="./remove.jsp" method="post">
-             
-             <input type="submit" name="excluir" value="Sim" />
-	     <a href="main.jsp">Cancelar</a>
+             Está certo disso?
+             <input type="submit" name="Sim" value="excluir" />
+	     <a href="main.jsp">Não</a>
 	     <input type="hidden" name="id" value=<%= id %> />
 	     <input type="hidden" name="action" value="removeValue" />
            </form>
