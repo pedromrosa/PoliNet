@@ -29,14 +29,6 @@
         <%
         pageContext.forward("login.jsp");
     }
-
-    // Acao dar logout      FALTA implementar
-//    String acao = request.getParameter("acao");
-//    if (acao.equals("logout")) {
-//        session.invalidate();
-//        response.sendRedirect("index.jsp");
-//        
-//    }
         
     // Busca usuario por ID
     String userId = request.getParameter("UserId");
@@ -106,6 +98,15 @@
                        </tr>
                     </table>
 
+                   <!--ALTERADO-->
+                    <%  if(nusp.equals(nusp_logado)){
+                        
+                        %>
+                        <!--BOTÃO DE EDITAR PERFIL-->
+                    <form><INPUT type="submit" class="formbutton" formaction="editPerfilAluno.jsp" value="Editar Perfil"></form>
+                    <% } 
+                    	%>
+
                 </fieldset>
                     <br/>
 
@@ -119,5 +120,15 @@
 		<div class="clear"></div>
 	</section>  <!-- fim do section:body -->
 	
+        <%
+    // Acao dar logout      FALTA implementar
+//    String acao = request.getParameter("acao");
+//    if (acao.equals("logout")) {
+//        request.getSession().invalidate();
+//        response.sendRedirect("index.jsp");
+//        
+//    }
+    %>
+        
     </body>
 </html>

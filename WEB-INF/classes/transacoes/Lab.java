@@ -64,7 +64,7 @@ public class Lab {
 
        tr.begin();
          LabData ldata = new LabData();
-	 Vector l = ldata.pesquisarPorDep(dep_lab, tr);
+	 Vector l = ldata.pesquisarPorDepartamento(dep_lab, tr);
        tr.commit();
        return l;
        

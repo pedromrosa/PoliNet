@@ -90,25 +90,32 @@ public class ProjetoData {
   } // buscar_idlab
   
   //17:05 07/12
-  public ProjetoDO pesquisarPorTitulo(String titulo, Transacao tr) throws Exception{
+  public Vector pesquisarPorTitulo(String titulo, Transacao tr) throws Exception{
      Connection con = tr.obterConexao();
      String sql = "select * from projeto where titulo=?";
      PreparedStatement ps = con.prepareStatement(sql);
      ps.setString(1, titulo);
      ResultSet rs = ps.executeQuery();
-     rs.next();
-     ProjetoDO projeto = new ProjetoDO();
-     projeto.setId (rs.getInt("id"));
-     projeto.setTitulo (rs.getString("titulo"));
-     projeto.setDescricao (rs.getString("descricao"));
-     projeto.setKW1 (rs.getString("palavra_chave1"));
-     projeto.setKW2 (rs.getString("palavra_chave2"));
-     projeto.setKW3 (rs.getString("palavra_chave3"));
-     projeto.setInicio (rs.getInt("semestre_inicio"));
-     projeto.setFim (rs.getInt("semestre_fim"));
-     projeto.setLab (rs.getInt("id_lab"));
-     projeto.setPatrocinador (rs.getString("patrocinador"));
-     return projeto;
+     System.out.println("query executada");
+     Vector projetos = new Vector();
+     while (rs.next()) {
+        ProjetoDO p = new ProjetoDO();
+        p.setId (rs.getInt("id"));
+        p.setTitulo (rs.getString("titulo"));
+        p.setDescricao (rs.getString("descricao"));
+        p.setKW1 (rs.getString("palavra_chave1"));
+        System.out.println(" got " + p.getKW1());
+        p.setKW2 (rs.getString("palavra_chave2"));
+        System.out.println(" got " + p.getKW2());
+        p.setKW3 (rs.getString("palavra_chave3"));
+        System.out.println(" got " + p.getKW3());
+        p.setInicio (rs.getInt("semestre_inicio"));
+        p.setFim (rs.getInt("semestre_fim"));
+        p.setLab (rs.getInt("id_lab"));
+        p.setPatrocinador (rs.getString("patrocinador"));
+        projetos.add(p);
+     }
+     return projetos;
   }
 
   public Vector pesquisarPorKeyword(String kw, Transacao tr) throws Exception {

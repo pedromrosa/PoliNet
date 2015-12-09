@@ -14,29 +14,31 @@
             String nusp_logado = (String)session.getAttribute("nusp_logado");
 
             // pega o Id do usuario
-            String userId = (String)session.getAttribute("UserId");
+            String userId = request.getParameter("UserId");
             
-            if (null == userId) { // nao obteve parametro userId - pegar perfil do nusp_logado
+            if (userId == null) { // nao obteve parametro userId - pegar perfil do nusp_logado
                 
                 transacoes.Usuario tu = new transacoes.Usuario();
                 data.UsuarioDO usuario = tu.buscarNusp(nusp_logado);
+                int id = usuario.getId();
                 
                 String vinculo = usuario.getVinculo();
                 
                 // Verifica o vinculo do usuario
                 if ("aluno".equals(vinculo)) {
-                    session.setAttribute("UserId", usuario.getId());
+   
                     session.setAttribute("nusp_logado", nusp_logado);
-                    pageContext.forward("perfilAluno.jsp");
+                    response.sendRedirect("perfilAluno.jsp?UserId=" + id);
                 }          
                 else { if ("professor".equals(vinculo)) {
-                    session.setAttribute("UserId", usuario.getId());
+
                     session.setAttribute("nusp_logado", nusp_logado);
-                    pageContext.forward("perfilProfessor.jsp");
+                    response.sendRedirect("perfilProfessor.jsp?UserId=" + id);
                 }
                 else { if ("assistente".equals(vinculo)) {
+                    
                     session.setAttribute("nusp_logado", nusp_logado);
-                    pageContext.forward("perfilAssistente.jsp");
+                    response.sendRedirect("perfilAssistente.jsp?UserId=" + id);
                 }
                 else {  // se nao for nenhum deles
                     %>
@@ -48,8 +50,8 @@
                 } // fim - else professor
                 
             } else { // obteve parametro userId
-                
-                int id = Integer.parseInt(request.getParameter("UserID"));
+
+                int id = Integer.parseInt(request.getParameter("UserId"));
 
                 transacoes.Usuario ta = new transacoes.Usuario();
                 data.UsuarioDO usuario = ta.buscar(id);
@@ -59,19 +61,20 @@
                 // Verifica o vinculo do usuario
                 if ("aluno".equals(vinculo)) {
                     
-                    session.setAttribute("UserId", id);
                     session.setAttribute("nusp_logado", nusp_logado);
-                    pageContext.forward("aluno.jsp");
+                    //pageContext.forward("aluno.jsp");
+                    response.sendRedirect("perfilAluno.jsp?UserId=" + userId);
+                    
                 }          
                 else { if ("professor".equals(vinculo)) {
                    
                     session.setAttribute("nusp_logado", nusp_logado);
-                    pageContext.setAttribute("userId", id);
-                    pageContext.forward("perfilProfessor.jsp");
+                    response.sendRedirect("perfilProfessor.jsp?UserId=" + userId);
                 }
                 else { if ("assistente".equals(vinculo)) {
+
                     session.setAttribute("nusp_logado", nusp_logado);
-                    pageContext.forward("usuario.jsp");
+                    response.sendRedirect("perfilAssistente.jsp?UserId=" + userId);
                 }
                 else {  // se nao for nenhum deles
                     %>

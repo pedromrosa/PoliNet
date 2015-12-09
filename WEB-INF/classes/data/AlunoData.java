@@ -21,12 +21,19 @@ public class AlunoData extends UsuarioData{
      int result = ps.executeUpdate();
   }
 
-  //public void excluir(AlunoDO aluno, Transacao tr) throws Exception {
-  //   excluir(aluno.getId(), tr);
-  //} // excluir
+  public void excluir(AlunoDO aluno, Transacao tr) throws Exception {
+     excluir(aluno.getId(), tr);
+     System.out.println(" got " + aluno.getId());
+  } // excluir
 
-  //public void excluir (int idobj, Transacao tr) throws Exception {
-  //} // excluir 
+  public void excluir (int idobj, Transacao tr) throws Exception {
+    Connection con = tr.obterConexao();
+    String sql = "delete from usuario where id=?";
+    PreparedStatement ps = con.prepareStatement(sql);
+    ps.setInt(1, idobj);
+    int result = ps.executeUpdate();
+    System.out.println("apagado com sucesso");
+  } // excluir 
 
   public void atualizar(AlunoDO aluno, Transacao tr) throws Exception {
     Connection con = tr.obterConexao();

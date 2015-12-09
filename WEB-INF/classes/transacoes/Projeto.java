@@ -76,13 +76,13 @@ public class Projeto {
   } // atualizar
     
     //-------------------PESQUISAR POR TÍTULO DO PROJETO-------------
-    public ProjetoDO pesquisa_titulo (String titulo_proj) throws Exception{
+  public Vector pesquisa_titulo (String titulo_proj) throws Exception{
      Transacao tr = new Transacao();
      try {
 
        tr.begin();
          ProjetoData pdata = new ProjetoData();
-	 ProjetoDO p= pdata.pesquisarPorTitulo(titulo_proj, tr);
+	 Vector p= pdata.pesquisarPorTitulo(titulo_proj, tr);
        tr.commit();
        return p;
        

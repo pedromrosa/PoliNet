@@ -5,9 +5,13 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.util.Vector" %>
 
 <%@ page import="transacoes.Professor"  %>
 <%@ page import="data.ProfessorDO"      %>
+
+<%@ page import="transacoes.Vinculo"  %>
+<%@ page import="data.VinculoDO"      %>
 
 <!DOCTYPE html>
 <html>
@@ -42,8 +46,8 @@
     String userId = request.getParameter("UserId");
     int id = Integer.parseInt(userId);
 
-    transacoes.Professor tp = new transacoes.Professor();
-    data.ProfessorDO professor = tp.buscar(id);
+    Professor tp = new Professor();
+    ProfessorDO professor = tp.buscar(id);
     
     // atualiza atributos do aluno de id UserID
     String nusp         = professor.getNusp(); 
@@ -94,17 +98,27 @@
                     </p>		
 
         	</article>
+                    
+<%
+    Vinculo v = new Vinculo();
+    Vector vinculos = v.buscarPorUserId(id);
+    VinculoDO vinculo1 = (VinculoDO) vinculos.elementAt(0);
+    VinculoDO vinculo2 = (VinculoDO) vinculos.elementAt(1);
+    int id_pro1 = vinculo1.getIdProjeto();
+    int id_pro2 = vinculo2.getIdProjeto();
+    
+%>
 
                 <fieldset>
                     <legend>Pesquisas</legend>
                     <table border="1" >
                        <tr>
                             <td width="80px">T&iacute;tulo: Oportunidade de pesquisa 1</td>
-                            <td>Descri&ccedil;&atilde;o: desc1 </td>
+                            <td>Descri&ccedil;&atilde;o: <%= id_pro1%> </td>
                        </tr>
                        <tr>
                             <td>T&iacute;tulo: Oportunidade de pesquisa 2</td>
-                            <td>Descri&ccedil;&atilde;o: desc2 </td>
+                            <td>Descri&ccedil;&atilde;o: <%= id_pro2%> </td>
                        </tr>
                     </table>
 

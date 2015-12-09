@@ -97,7 +97,7 @@
 
                             <p><a href="selecionaCadastro.jsp">Cadastrar novo usu&aacute;rio</a>
                                 <br />
-                            <a href="esqueciSenha.html">Esqueci a senha</a></p>
+                            <a href="esqueciSenha.jsp">Esqueci a senha</a></p>
                             <input type="hidden" name="logar" />
                             
                         </FORM>
