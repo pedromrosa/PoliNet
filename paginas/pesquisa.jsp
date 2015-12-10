@@ -3,7 +3,6 @@
     Created on : 10/12/2015, 15:40:33
     Author     : Pedro
 --%>
-
 <%@ page import="data.ProjetoDO" %>
 <%@ page import="data.LaboratorioDO" %>
 <%@ page import="java.util.Vector" %>
@@ -29,6 +28,7 @@
                     <li><a href="index.jsp">Home</a></li>
                     <li><a href="usuario.jsp">Perfil</a></li>
                     <li class="selected-item"><a href="#">Pesquisa</a></li>
+                    <li><a href="pesquisaMenu.jsp">Diret&oacute;rio</a></li>
                     <li><a href="mensagem.jsp">Correio</a></li>
                     <li><a href="logout.jsp">Logout</a></li>
                     <li><a href="sobreNos.jsp">Sobre n&oacute;s</a></li>
@@ -43,7 +43,7 @@
                     <p> Entre com o campo de pesquisa</p>&nbsp;
 			  
                     <fieldset>
-                        <legend>Diret&oacute;rio de Projetos e Laboratórios</legend>
+                        <legend>Formul&aacute;rio de pesquisa</legend>
                         <FORM action="" method="post">
 				
                         <p>Selecione o campo a ser pesquisado:<label for="text"></label>
@@ -238,6 +238,7 @@
                         </FORM>
                     </fieldset>
                     <fieldset>
+       <!-- Direcionar a partir da hiperlink "vizualizar" -->                        
 <%                      if ("perfil".equals(request.getParameter("visualizar"))) {
                             String ID = request.getParameter("id");
                             response.sendRedirect("visualizarPerfil.jsp?UserId=" + ID);

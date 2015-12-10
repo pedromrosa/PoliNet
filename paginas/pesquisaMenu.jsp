@@ -3,7 +3,9 @@
     Created on : 29/11/2015, 12:33:40
     Author     : Pedro
 --%>
-
+<%@ page import="data.ProjetoDO" %>
+<%@ page import="data.LaboratorioDO" %>
+<%@ page import="java.util.Vector" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,24 +14,20 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Tela de pesquisa</title>
     </head>
-    
     <body>
-        
 	<section id="body" class="width">
             <aside id="sidebar" class="column-left">
-
                 <header>
                     <h1><a href="#">PoliNet</a></h1>
                     <h2>Seja bem vindo!</h2>
                 </header>
-			
                 <h1 align="right">Usu&aacute;rio</h1>
-
                 <nav id="mainnav"> <ul>
                     <li><a href="index.jsp">Home</a></li>
                     <li><a href="usuario.jsp">Perfil</a></li>
                     <li class="selected-item"><a href="#">Pesquisa</a></li>
-                    <li><a href="login.jsp">Logout</a></li>
+                    <li><a href="mensagem.jsp">Correio</a></li>
+                    <li><a href="logout.jsp">Logout</a></li>
                     <li><a href="sobreNos.jsp">Sobre n&oacute;s</a></li>
                 </ul> </nav>
             </aside>
@@ -38,26 +36,63 @@
                   		
         	<article>
         
-                    <h1>Tela de pesquisa</h1>&nbsp;
-                    <p> Entre com o campo de pesquisa de laborat&oacute;rio</p>&nbsp;
+                    <h1>Tela de diret&oacute;rio</h1>&nbsp;
+                    <p> Escolha o campo de pesquisa</p>&nbsp;
 			  
                     <fieldset>
-                        <legend>Formul&aacute;rio de pesquisa</legend>
+                        <legend>Diret&oacute;rio de Projetos e Laboratórios</legend>
                         <FORM action="usuario.jsp" method="post">
 				
-                        <p>Selecione o campo a ser pesquisado:<label for="text"></label>
+                        <p>Selecione o que pesquisar:<label for="text"></label>
                             <select name="campoPesquisa">
-                                <option value="" selected="selected" />
-                                <option value="1">Nome</option>
-                                <option value="2">Departamento</option>
+                                <option value="vazio" selected="selected" />
+                                <option value="labor">Laborat&oacute;rios</option>
+                                <option value="proje">Projetos</option>
                             </select></p>
-				  
-                        <p><label for="text">Pesquisa:</label>
-                        <input type="text" name="pesquisa" id="pesquisa" value="" size="80" /><br /></p>
-				  
+				  				  
                         <p><INPUT type="submit" class="formbutton" value="Pesquisar">
                         <INPUT type="reset" class="formbutton" value="Limpar pesquisa"></p>
-				  
+<%                      if ("vazio".equals(request.getParameter("campoPesquisa"))){
+%>       
+                        <script type="text/JavaScript"> alert("Selecione um campo!");</script>
+<%                      }
+                        if ("labor".equals(request.getParameter("campoPesquisa"))){
+                            Vector deplist = new Vector();
+                            deplist.add("PME");
+                            deplist.add("PMR");
+                                
+                            for (int j = 0; j < deplist.size(); j++) {
+%>
+                        <p> Departamento:<%=deplist.elementAt(j) %></p>
+<%                              transacoes.Laboratorio tn = new transacoes.Laboratorio();
+                                Vector laboratorios = tn.buscarDepartamento((String) deplist.elementAt(j));
+                                if ( (laboratorios == null) || (laboratorios.size() == 0)){
+%>				  
+                        <p> Nenhum laborat&oacute;rio neste departamento!</p>
+<%                              } else {           
+%>
+                        <table>
+                        <tr>
+                           <td>Nome</td>
+                           <td>Descri&ccedil;&atilde;o</td>
+                           <td>Link Site</td>
+                        </tr>
+<%                                  for(int i = 0; i < laboratorios.size(); i++) {
+                                        LaboratorioDO laboratorio = (LaboratorioDO)laboratorios.elementAt(i);
+%>                      <tr>
+                            <td><%= laboratorio.getNome() %></td>
+                            <td><%= laboratorio.getDescricao() %></td>
+                            <td><%= laboratorio.getSite() %></td>
+                            <td><a href=pesquisa.jsp?visualizar=laboratorio&id=<%= laboratorio.getId()%>>Visualizar Laboratorio</a></td>
+                        </tr>        
+<%                                      
+                                        }
+%>
+                      </table>
+<%                                  }
+                                }
+                        }
+%>
                         </FORM>
                     </fieldset>	
 

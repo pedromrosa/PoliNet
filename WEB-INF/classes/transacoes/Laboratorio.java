@@ -15,7 +15,60 @@ import utils.Transacao;
  */
 public class Laboratorio {
     
-    public LaboratorioDO buscar(int idobj) throws Exception{
+  public boolean incluir (LaboratorioDO lab) throws Exception{
+     // efetuando a transacao
+     Transacao tr = new Transacao();
+     try {
+
+       tr.begin();
+         LaboratorioData ldata = new LaboratorioData();
+         ldata.incluir(lab, tr);
+       tr.commit();
+       return true;
+       
+     } catch(Exception e) {
+         tr.rollback();
+         System.out.println("erro ao incluir " + lab.getNome());
+         e.printStackTrace();
+     }
+     return false;
+  } // incluir
+
+  public boolean atualizar(LaboratorioDO lab) throws Exception {
+     Transacao tr = new Transacao();
+	 try{
+	   tr.begin();
+  	     LaboratorioData ldata = new LaboratorioData();
+	     ldata.atualizar(lab, tr);
+	   tr.commit();
+	   return true;
+	 } catch (Exception e) {
+	   tr.rollback();
+	   System.out.println("erro ao atualizar" + lab.getNome());
+	   e.printStackTrace();
+	 }
+	 return false;
+  } // atualizar
+
+ 
+   public boolean excluir(LaboratorioDO lab) throws Exception {
+     Transacao tr = new Transacao();
+	 try{
+	   // inserir validacoes de regras de negocio
+	   tr.begin();
+  	     LaboratorioData ldata = new LaboratorioData();
+	     ldata.excluir(lab, tr);
+	   tr.commit();
+	   return true;
+	 } catch (Exception e) {
+	   tr.rollback();
+	   System.out.println("erro ao excluir" + lab.getNome());
+	   e.printStackTrace();
+	 }
+	 return false;
+   }
+  
+  public LaboratorioDO buscar(int idobj) throws Exception{
      Transacao tr = new Transacao();
 	 try{
 	   tr.beginReadOnly();
@@ -77,4 +130,16 @@ public class Laboratorio {
 	 }
 	 return null;
   }
+    
+//-----------???----------
+  public static void main(String[] args) {
+//      Projeto p = new Projeto();
+//      ProjetoDO projeto = new ProjetoDO();
+//      try {
+//	    projeto = p.buscar(6);
+//            System.out.println(usuario.getNusp());
+//      } catch(Exception e) {
+//            e.printStackTrace();
+//      }
+  } // main
 }

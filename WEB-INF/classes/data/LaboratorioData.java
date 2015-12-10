@@ -22,6 +22,11 @@ public class LaboratorioData {
   } // excluir
 
   public void excluir (int idobj, Transacao tr) throws Exception {
+    Connection con = tr.obterConexao();
+    String sql = "DELETE FROM lab where id=?";
+    PreparedStatement ps = con.prepareStatement(sql);
+    ps.setInt(1, idobj);
+    int result = ps.executeUpdate();
   } // excluir 
 
   public void atualizar(LaboratorioDO lab, Transacao tr) throws Exception {
