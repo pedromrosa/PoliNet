@@ -4,7 +4,7 @@
     Author     : Heitor
 --%>
 <%@ page import="data.ProjetoDO" %>
-<%@ page import="data.LabDO" %>
+<%@ page import="data.LaboratorioDO" %>
 <%@ page import="java.util.Vector" %>
 <%@ page import="transacoes.Usuario" %>
 <%@ page import="data.UsuarioDO" %>
@@ -33,6 +33,7 @@
                     <li><a href="index.jsp">Home</a></li>
                     <li><a href="usuario.jsp">Perfil</a></li>
                     <li class="selected-item"><a href="#">Pesquisa</a></li>
+                    <li><a href="mensagem.jsp">Correio</a></li>
                     <li><a href="login.jsp">Logout</a></li>
                     <li><a href="sobreNos.jsp">Sobre n&oacute;s</a></li>
                 </ul> </nav>
@@ -80,11 +81,11 @@
 %>
                         <table>
                         <tr>
-                           <td>N&uacute;mero USP</td>
-                           <td>E-mail</td>
-                           <td>Nome</td>
-                           <td>Sobrenome</td>
-                           <td>V&iacute;nculo</td>
+                           <td><b>N&uacute;mero USP</b></td>
+                           <td><b>E-mail</b></td>
+                           <td><b>Nome</b></td>
+                           <td><b>Sobrenome</b></td>
+                           <td><b>V&iacute;nculo</b></td>
                         </tr>
 <%                          for(int i = 0; i < usuarios.size(); i++) {
                                 UsuarioDO usuario = (UsuarioDO)usuarios.elementAt(i);
@@ -94,6 +95,7 @@
                             <td><%= usuario.getNome() %></td>
                             <td><%= usuario.getSobrenome() %></td>
                             <td><%= usuario.getVinculo() %></td>
+                            <td><a href=pesquisa.jsp?visualizar=perfil&id=<%= usuario.getId()%>>Visualizar Usuário</a></td>
                         </tr>        
 <%                      }   
 %>                      </table>            
@@ -116,12 +118,13 @@
                            <td>Link Site</td>
                         </tr>
 <%                                  for(int i = 0; i < laboratorios.size(); i++) {
-                                       LabDO laboratorio = (LabDO)laboratorios.elementAt(i);
+                                       LaboratorioDO laboratorio = (LaboratorioDO)laboratorios.elementAt(i);
 %>                      <tr>
                             <td><%= laboratorio.getNome() %></td>
                             <td><%= laboratorio.getDepartamento() %></td>
                             <td><%= laboratorio.getDescricao() %></td>
                             <td><%= laboratorio.getSite() %></td>
+                            <td><a href=pesquisa.jsp?visualizar=laboratorio&id=<%= laboratorio.getId()%>>Visualizar Laboratorio</a></td>
                         </tr>        
 <%                                   }   
 %>                      </table>
@@ -138,18 +141,19 @@
 %>
                         <table>
                         <tr>
-                           <td>Nome</td>
-                           <td>Departamento</td>
-                           <td>Descri&ccedil;&atilde;o</td>
-                           <td>Link Site</td>
+                            <td><b>Nome</b></td>
+                           <td><b>Departamento</b></td>
+                           <td><b>Descri&ccedil;&atilde;o</b></td>
+                           <td><b>Link Site</b></td>
                         </tr>
 <%                                  for(int i = 0; i < laboratorios.size(); i++) {
-                                       LabDO laboratorio = (LabDO)laboratorios.elementAt(i);
+                                       LaboratorioDO laboratorio = (LaboratorioDO)laboratorios.elementAt(i);
 %>                      <tr>
                             <td><%= laboratorio.getNome() %></td>
                             <td><%= laboratorio.getDepartamento() %></td>
                             <td><%= laboratorio.getDescricao() %></td>
                             <td><%= laboratorio.getSite() %></td>
+                            <td><a href=pesquisa.jsp?visualizar=laboratorio&id=<%= laboratorio.getId()%>>Visualizar Laboratorio</a></td>
                         </tr>        
 <%                                   }   
 %>                      </table>
@@ -166,15 +170,15 @@
 %>
                         <table>
                         <tr>
-                           <td>T&iacute;tulo</td>
-                           <td>Descri&ccedil;&atilde;o</td>
-                           <td>Palavra-Chave 1</td>
-                           <td>Palavra-Chave 2</td>
-                           <td>Palavra-Chave 3</td>
-                           <td>Semestre de In&iacute;cio</td>
-                           <td>Semestre de Término</td>
-                           <td>Laborat&aacute;rio</td>
-                           <td>Patrocinador</td>
+                            <td><b>T&iacute;tulo</b></td>
+                           <td><b>Descri&ccedil;&atilde;o</b></td>
+                           <td><b>Palavra-Chave 1</b></td>
+                           <td><b>Palavra-Chave 2</b></td>
+                           <td><b>Palavra-Chave 3</b></td>
+                           <td><b>Semestre de In&iacute;cio</b></td>
+                           <td><b>Semestre de Término</b></td>
+                           <td><b>Laborat&aacute;rio</b></td>
+                           <td><b>Patrocinador</b></td>
                         </tr>
 <%                                  for(int i = 0; i < projetos.size(); i++) {
                                        ProjetoDO projeto = (ProjetoDO)projetos.elementAt(i);
@@ -188,6 +192,7 @@
                             <td><%= projeto.getFim() %></td>
                             <td><%= projeto.getLab() %></td>
                             <td><%= projeto.getPatrocinador() %></td>
+                            <td><a href=pesquisa.jsp?visualizar=projeto&id=<%= projeto.getId()%>>Visualizar Projeto</a></td>
                         </tr>        
 <%                                   }   
 %>                      </table>
@@ -204,15 +209,15 @@
 %>
                         <table>
                         <tr>
-                           <td>T&iacute;tulo</td>
-                           <td>Descri&ccedil;&atilde;o</td>
-                           <td>Palavra-Chave 1</td>
-                           <td>Palavra-Chave 2</td>
-                           <td>Palavra-Chave 3</td>
-                           <td>Semestre de In&iacute;cio</td>
-                           <td>Semestre de Término</td>
-                           <td>Laborat&aacute;rio</td>
-                           <td>Patrocinador</td>
+                           <td><b>T&iacute;tulo</b></td>
+                           <td><b>Descri&ccedil;&atilde;o</b></td>
+                           <td><b>Palavra-Chave 1</b></td>
+                           <td><b>Palavra-Chave 2</b></td>
+                           <td><b>Palavra-Chave 3</b></td>
+                           <td><b>Semestre de In&iacute;cio</b></td>
+                           <td><b>Semestre de Término</b></td>
+                           <td><b>Laborat&aacute;rio</b></td>
+                           <td><b>Patrocinador</b></td>
                         </tr>
 <%                                  for(int i = 0; i < projetos.size(); i++) {
                                        ProjetoDO projeto = (ProjetoDO)projetos.elementAt(i);
@@ -226,6 +231,7 @@
                             <td><%= projeto.getFim() %></td>
                             <td><%= projeto.getLab() %></td>
                             <td><%= projeto.getPatrocinador() %></td>
+                            <td><a href=pesquisa.jsp?visualizar=projeto&id=<%= projeto.getId()%>>Visualizar Projeto</a></td>
                         </tr>        
 <%                                   }   
 %>                      </table>
@@ -234,8 +240,22 @@
                         }
 %>		  
                         </FORM>
-                    </fieldset>	
-
+                    </fieldset>
+                    <fieldset>
+<%                      if ("perfil".equals(request.getParameter("visualizar"))) {
+                            String ID = request.getParameter("id");
+                            response.sendRedirect("visualizarPerfil.jsp?UserId=" + ID);
+}
+                        if ("laboratorio".equals(request.getParameter("visualizar"))) {
+                            String ID = request.getParameter("id");
+                            response.sendRedirect("visualizarLaboratorio.jsp?UserId=" + ID);
+}
+                        if ("projeto".equals(request.getParameter("visualizar"))) {
+                            String ID = request.getParameter("id");
+                            response.sendRedirect("visualizarProjeto.jsp?UserId=" + ID);
+}
+%>
+                    </fieldset>
         	</article>
         			
                 <img src="images/usp_relogio_red.jpg" class="resize" alt="" />

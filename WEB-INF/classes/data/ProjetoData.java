@@ -8,7 +8,7 @@ public class ProjetoData {
 
   public void incluir(ProjetoDO projeto, Transacao tr) throws Exception {
      Connection con = tr.obterConexao();
-     String sql = "insert into projeto (titulo, descricao, palavra_chave1, palavra_chave2, palavra_chave3, semestre_inicio, semestre_fim, id_lab, patrocinador) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+     String sql = "insert into projeto (titulo, descricao, palavra_chave1, palavra_chave2, palavra_chave3, semestre_inicio, semestre_fim, patrocinador) values (?, ?, ?, ?, ?, ?, ?, ?)";
      PreparedStatement ps = con.prepareStatement(sql);
      ps.setString(1, projeto.getTitulo());
      ps.setString(2, projeto.getDescricao());
@@ -17,8 +17,7 @@ public class ProjetoData {
      ps.setString(5, projeto.getKW3());
      ps.setInt(6, projeto.getInicio());
      ps.setInt(7, projeto.getFim());
-     ps.setInt(8, projeto.getLab());
-     ps.setString(9, projeto.getPatrocinador());
+     ps.setString(8, projeto.getPatrocinador());
      int result = ps.executeUpdate();
   }
 

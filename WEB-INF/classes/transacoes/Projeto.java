@@ -93,7 +93,39 @@ public class Projeto {
      }
      return null;
   } // excluir
-    
+    public boolean incluir (ProjetoDO projeto) throws Exception{
+
+     // validacao das regras de negocio
+     if ( (isEmpty(projeto.getTitulo())) || ( isEmpty(projeto.getDescricao())) || ( isEmpty(projeto.getKW1())) || ( isEmpty(projeto.getKW2())) || ( isEmpty(projeto.getKW3())) || projeto.getInicio()==0 || projeto.getFim()==0 || isEmpty(projeto.getPatrocinador())) {
+       return false;
+     }
+
+     // efetuando a transacao
+     Transacao tr = new Transacao();
+     try {
+
+       tr.begin();
+         ProjetoData pdata = new ProjetoData();
+         pdata.incluir(projeto, tr);
+       tr.commit();
+       return true;
+              
+     } catch(Exception e) {
+         tr.rollback();
+         System.out.println("erro ao incluir " + projeto.getTitulo());
+         e.printStackTrace();
+     }
+     return false;
+  } // incluir
+  
+     private boolean isEmpty(String s) {
+     if (null == s)
+       return true;
+     if (s.length() == 0)
+       return true;
+     return false;
+  }
+     
 //-----------???----------
   public static void main(String[] args) {
 //      Projeto p = new Projeto();

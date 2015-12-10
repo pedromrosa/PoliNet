@@ -1,9 +1,10 @@
 <%-- 
     Document   : esqueciSenha
-    Created on : 29/11/2015, 11:59:06
-    Author     : Humberto
+    Created on : 09/12/2015, 01:36:45
+    Author     : Heitor
 --%>
 
+<%@page import="data.UsuarioDO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -37,16 +38,17 @@
 			  
                     <fieldset>
                         <legend>Recuperar senha</legend>
-                        <FORM onsubmit="procuraSenha()" method="post">
+                        <FORM method="post">
 				
-                            <p><label for="text">Login:</label>
-                            <input type="text" name="login" id="login" value=""/><br /></p>
+                            <p><label for="text">E-mail:</label>
+                            <input type="text" name="email" id="email" value=""/><br /></p>
 				  
                             <p><label for="text">N&uacute;mero USP:</label>
                             <input type="text" name="nusp" id="nusp" value=""/><br /></p>
 				  
                             <p><INPUT type="submit" class="formbutton" value="Recuperar Senha">
-                            <INPUT type="reset" class="formbutton" value="Limpar dados"></p>
+                                <INPUT type="reset" class="formbutton" value="Limpar dados"></p>
+                            <INPUT type="hidden" name="acao" value="esqueceuSenha">
 
                         </FORM>
                     </fieldset>	
@@ -63,10 +65,34 @@
             <div class="clear"></div>
 	</section>
 	
-        <script type="text/javascript">
-            function procuraSenha() {
-                             // a implementar
+        
+<%
+            if (null != request.getParameter("acao")){
+                String Email = request.getParameter("email");
+                String NUSP = request.getParameter("nusp");
+                transacoes.Usuario tn = new transacoes.Usuario();
+                UsuarioDO usuario = tn.buscarEmail(Email);
+                UsuarioDO usuario2 = tn.buscarNusp(NUSP);
+                if (usuario == null) {
+%>
+            <script type="text/JavaScript"> alert("O e-mail digitado não foi encontrado!");</script>
+<%              } else { 
+                    if (usuario2 == null){
+%>
+            <script type="text/JavaScript"> alert("O número USP digitado não foi encontrado!");</script>
+<%                  }
+                    else {
+                        if (usuario.getNusp().equals(usuario2.getNusp())){
+%>
+            <script type="text/JavaScript"> alert("A senha procurada é: <%= usuario.getSenha() %>");</script>
+<%                      }
+                        else{
+%>
+            <script type="text/JavaScript"> alert("O e-mail e número USP não conferem!");</script>
+<%                      }
+                    }
+                  }
             }
-        </script>
+%>   
     </body>
 </html>

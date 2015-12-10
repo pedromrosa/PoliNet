@@ -15,26 +15,6 @@
         <title>Tela inicial</title>
     </head>
     <body>
-<%
-    if ( request.getParameter("campo_controle") != null ) {
-        // processa login
-        String user = request.getParameter("usuario");
-        String passwd = request.getParameter("senha");
-        // metodo valida deve ser implementado
-        //boolean v = valida(user, passwd);
-        // simulacao: deve ser 123
-        boolean v = "123".equals(passwd);
-        if (v) {
-           session.setAttribute("user_name", user);
-           pageContext.forward("main.jsp");
-        } else {
-   %>
-           Usuario ou Senha invalidos!
-   <%
-        }
-    }
-    // show login form
-%> <!-- FIM DO MODELO DO TSUZUKI -->
         
 <%
     // Verificacao do usuario logado
@@ -61,10 +41,11 @@
                     } else {
                 %>
                 <nav id="mainnav"> <ul>
-                    <li><a href="index.jsp">Home</a></li>
-                    <li class="selected-item"><a href="#">Perfil</a></li>
+                    <li class="selected-item"><a href="#">Home</a></li>
+                    <li><a href="visualizarPerfil.jsp">Perfil</a></li>
                     <li><a href="pesquisa.jsp">Pesquisa</a></li>
-                    <li><a href="login.jsp?acao=logout">Logout</a></li>
+                    <li><a href="mensagem.jsp">Correio</a></li>
+                    <li><a href="logout.jsp">Logout</a></li>
                     <li><a href="sobreNos.jsp">Sobre n&oacute;s</a></li>
                 </ul> </nav>
                 <%
@@ -79,17 +60,22 @@
                     <h1>Seja bem vindo!!</h1>
                     <p>Essa &eacute; a <strong>PoliNet</strong>, onde voc&ecirc; encontra a oportunidade de pesquisa mais adequada &agrave; voc&ecirc;.</p>		
                     
+                    
                     <fieldset>
-                        <legend>Faça Login</legend>
-                        <form method="post" action=index.jsp>
-                            <p><label for="text">USR</label>
-                                <input type="text" name="usuario" /><br /></p>
-                            <p><label for="text">PWD</label>
-                                <input type="password" name="senha" /><br /></p>
-                            <p><input type="submit" class="formbutton" name="enviar" value="Enviar" />
-                                <input type="hidden" name="campo_controle" /></p>
-                        </form>
+                        <br/>
+                        <p>Nós da <b>PoliNet</b> entendemos como encontrar o projeto perfeito ou o melhor aluno para seu projeto de pesquisa podem ser tarefas difíceis.
+                           Pensando nisso, criamos um espaço onde alunos e professores podem se conectar e compartilhar informações sobre as diversas oportunidades dentro da Escola.</p>
+                        <br/>
+                        <br/>
+                        <p>Faça já o seu cadastro e entre nessa nova rede que veio para te ajudar!</p>
                     </fieldset>
+                    
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    
+             
 
                     <img src="images/usp_relogio_red.jpg" class="resize" alt="" />
         

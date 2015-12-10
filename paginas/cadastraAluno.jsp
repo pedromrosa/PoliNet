@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="data.UsuarioDO"     %>
+<%@ page import="transacoes.Usuario" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -37,45 +39,36 @@
 			  
                 <fieldset>
                     <legend>Informe seus dados cadastrais</legend>
-                    <FORM action="usuario.jsp" method="post">
+                    <FORM method="post">
 
-                        <p><label for="text">Nome completo:</label>
-                        <input type="text" name="nome" id="nome" value=""/><br /></p>
-				  
-                        <p><label for="text">Login:</label>
-                        <input type="text" name="login" id="login" value=""/><br /></p>
-				  
+                        <p><label for="text">Nome:</label>
+                        <input type="text" name="nome" value=""/><br /></p>
+                        
+                        <p><label for="text">Sobrenome:</label>
+                        <input type="text" name="sobrenome" value=""/><br /></p>
+                        
+                        <p><label for="text">E-mail:</label>
+                        <input type="text" name="email" value=""/><br /></p>
+
                         <p><label for="text">Senha:</label>
-    			<input type="password" name="senha" id="senha" value=""/><br /></p>
+						<input type="password" name="senha" value=""/><br /></p>
 				  
                         <p><label for="text">Institui&ccedil;&atilde;o:</label>
                             <select name="instituicao">
                                 <option value="" selected="selected" />
-                                <option value="1">Escola Polit&eacute;cnica</option>
-                                <option value="2">Insituto de F&iacute;sica</option>
+                                <option value="POLI">Escola Polit&eacute;cnica</option>
+                                <option value="IF">Insituto de F&iacute;sica</option>
                             </select></p>
 	
-                        <p><label for="text">Departamento:</label>
-                            <select name="departamento">
-                                  <option value="" selected="selected" />
-                                  <option value="1">PMR</option>
-                                  <option value="2">PME</option>
-                            </select></p>
-
-                        <p><label for="text">Laborat&oacute;rio:</label>
-                        <input type="text" name="laboratiorio" id="laboratorio" value=""/><br /></p>
-				    
                         <p><label2 for="text">Link do curr&iacute;culo Lattes:</label2>
-                        <input type="text" name="linkLattes" id="linkLattes" value="http://" size="80"/><br /></p>
-				  
-                        <p><label2 for="text">C&oacute;digo CV:</label2>
-                        <input type="text" name="codCV" id="codCV" value=""/><br /></p>
-				  
+                        <input type="text" name="linkLattes" value="http://" size="80"/><br /></p>
+
                         <p><label2 for="text">C&oacute;digo do hist&oacute;rico:</label2>
-                        <input type="text" name="codHist" id="codHist" value=""/><br /></p>
+                        <input type="text" name="codHist" value=""/><br /></p>
 			
                         <p><INPUT type="submit" class="formbutton" value="Cadastrar">
                         <INPUT type="reset" class="formbutton" value="Limpar dados"></p>
+                        <input type="hidden" name="cadastra" value="true" />
 
         	    </FORM>
                 </fieldset>	
@@ -90,5 +83,62 @@
         <div class="clear"></div>
     </section>
 	
+    <% 
+        if ("true".equals(request.getParameter("cadastra"))) {
+            
+            String nusp        = request.getParameter("nusp");
+            String nome        = request.getParameter("nome");
+            String sobrenome   = request.getParameter("sobrenome");
+            String email       = request.getParameter("email");
+            String senha       = request.getParameter("senha");
+            String instituicao = request.getParameter("instituicao");
+            String lattes      = request.getParameter("linkLattes");
+            String cod_hist    = request.getParameter("codHist");
+            
+            transacoes.Usuario tu = new transacoes.Usuario();
+            data.UsuarioDO usuario = new data.UsuarioDO();
+            
+            usuario.setNusp(nusp);
+            usuario.setNome(nome);
+            usuario.setSobrenome(sobrenome);
+            usuario.setEmail(email);
+            usuario.setSenha(senha);
+            usuario.setVinculo("aluno");
+            
+            if (tu.incluir(usuario)) {
+                usuario = tu.buscarNusp(nusp);
+                int id  = usuario.getId();
+                
+                transacoes.Aluno ta = new transacoes.Aluno();
+                data.AlunoDO aluno = new data.AlunoDO();
+                
+                aluno.setId(id);
+                aluno.setNusp(nusp);
+                aluno.setEmail(email);
+                aluno.setNome(nome);
+                aluno.setSobrenome(sobrenome);
+                aluno.setLattes(lattes);
+                aluno.setInstituicao(instituicao);
+                aluno.setHist(cod_hist);
+                
+                if (ta.incluir(aluno)) {
+                    %>
+                    <script type="text/JavaScript"> alert("Cadastro realizado com sucesso!"); </script>
+                    <%
+                    response.sendRedirect("login.jsp");
+                } 
+                else {  // caso de criar usuario e nao criar aluno
+                    tu.excluir(usuario);
+                %>
+                <script type="text/JavaScript"> alert("Erro no cadastro: aluno!"); </script>
+                <%
+                }
+            } else { // caso o cadastro nao for completado
+            %>
+            <script type="text/JavaScript"> alert("Erro no cadastro:usuario!"); </script>
+            <%
+            }
+        }   // fim do cadastra
+    %>
     </body>
 </html>

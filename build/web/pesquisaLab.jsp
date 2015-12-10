@@ -1,7 +1,7 @@
 <%-- 
-    Document   : pesquisa
+    Document   : pesquisaLab
     Created on : 29/11/2015, 12:33:40
-    Author     : Humberto
+    Author     : Pedro
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -48,8 +48,8 @@
                         <p>Selecione o campo a ser pesquisado:<label for="text"></label>
                             <select name="campoPesquisa">
                                 <option value="" selected="selected" />
-                                <option value="1">por nome</option>
-                                <option value="2">por departamento</option>
+                                <option value="1">Nome</option>
+                                <option value="2">Departamento</option>
                             </select></p>
 				  
                         <p><label for="text">Pesquisa:</label>

@@ -5,9 +5,19 @@
 --%>
 
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.util.Vector" %>
 
 <%@ page import="transacoes.Aluno"  %>
 <%@ page import="data.AlunoDO"      %>
+
+<%@ page import="transacoes.Vinculo"  %>
+<%@ page import="data.VinculoDO"      %>
+
+<%@ page import="transacoes.Projeto"  %>
+<%@ page import="data.ProjetoDO"      %>
+
+<%@ page import="transacoes.Laboratorio"  %>
+<%@ page import="data.LaboratorioDO"      %>
 
 <!DOCTYPE html>
 <html>
@@ -62,6 +72,7 @@
                     <li><a href="index.jsp">Home</a></li>
                     <li class="selected-item"><a href="#">Perfil</a></li>
                     <li><a href="pesquisa.jsp">Pesquisa</a></li>
+                    <li><a href="mensagem.jsp">Correio</a></li>
                     <li><a href="login.jsp?UserId=<%=userId%>&acao=logout">Logout</a></li>
                     <li><a href="sobreNos.jsp">Sobre n&oacute;s</a></li>
                 </ul> </nav>
@@ -73,10 +84,10 @@
         	    
                     <p id="paginaURL"></p>
 				
-                    <h1>Nome completo: <%= nome +" "+ sobrenome %></h1>
+                    <h1><%= nome +" "+ sobrenome %></h1>
                     <p>
                     <p2>Institui&ccedil;&atilde;o: <%= instituicao %> <br /></p2>
-                    <p2>Descri&ccedil;&atilde;o do usu&aacute;rio: atolado de trabalhos <br />
+                    <p2>Descri&ccedil;&atilde;o do usu&aacute;rio: Aluno dedicado e competente <br />
                     <p2>N&uacute;mero USP: <%= nusp %> <br /></p2>
                     <p2>Link Currículo Lattes: <%= link_lattes %> <br /></p2>
 <!--                    <p2>Código CV: <%= codigo_CV %> Código Histórico: <%= codigo_Hist %> <br /></p2>-->
@@ -85,30 +96,45 @@
 
         	</article>
 
-                <fieldset>
-                    <legend>Pesquisas</legend>
-                    <table border="1" >
-                       <tr>
-                            <td width="80px">T&iacute;tulo: Oportunidade de pesquisa 1</td>
-                            <td>Descri&ccedil;&atilde;o: desc1 </td>
-                       </tr>
-                       <tr>
-                            <td>T&iacute;tulo: Oportunidade de pesquisa 2</td>
-                            <td>Descri&ccedil;&atilde;o: desc2 </td>
-                       </tr>
-                    </table>
+<%  
+    Vinculo v = new Vinculo();
+    Vector vinculos = v.buscarPorUserId(id);
+    
+    if ( (vinculos != null) && (vinculos.size() != 0)){
+        
+        %>
+                    <fieldset>
+            <legend>Pesquisas de <%=nome%></legend>
+            <table border="1">
+                <tr>
+                    <td><b>Pesquisa</b></td>
+                    <td><b>Laboratório</b></td>
+                    <td><b>Link</b></td>
+                </tr>
+        <%
+    for(int i = 0; i < vinculos.size(); i++) {
+        VinculoDO vinculo = (VinculoDO)vinculos.elementAt(i);
+        
+        Projeto p = new Projeto();
+        ProjetoDO projeto = p.pesquisa_id(vinculo.getIdProjeto());
+        
+        Laboratorio l = new Laboratorio();
+        LaboratorioDO lab = l.buscar(vinculo.getIdLab());
+        
+%>                  
+                    <tr>
+                         <td><%= projeto.getTitulo() %></td>
+                         <td><%= lab.getNome()%></td>
+                         <td><a href=pesquisa.jsp?visualizar=projeto&id=<%= projeto.getId()%>>Visualizar Projeto</a></td>
+      
+                    </tr>        
+<%                      }   
+%>          </table>    
+            </fieldset>
+<% }
+%>
 
-                   <!--ALTERADO-->
-                    <%  if(nusp.equals(nusp_logado)){
-                        
-                        %>
-                        <!--BOTÃO DE EDITAR PERFIL-->
-                    <form><INPUT type="submit" class="formbutton" formaction="editPerfilAluno.jsp" value="Editar Perfil"></form>
-                    <% } 
-                    	%>
-
-                </fieldset>
-                    <br/>
+<br/> 
 
                     <img src="images/usp_relogio_red.jpg" class="resize" alt="" />
         	
@@ -121,7 +147,7 @@
 	</section>  <!-- fim do section:body -->
 	
         <%
-    // Acao dar logout      FALTA implementar
+//    // Acao dar logout      FALTA implementar
 //    String acao = request.getParameter("acao");
 //    if (acao.equals("logout")) {
 //        request.getSession().invalidate();

@@ -69,14 +69,51 @@
                 if ("aluno".equals(vinculo)) {
                     
                     transacoes.Aluno ta = new transacoes.Aluno();
-                    data.UsuarioDO Aluno = ta.buscarNusp(nusp_logado);
-                    ta.excluir(Aluno);
+                    data.UsuarioDO aluno = ta.buscarNusp(nusp_logado);
+                    ta.excluir(aluno);
                     tu.excluir(usuario);
+                    
+                                   if (tu.excluir(usuario)&&ta.excluir(aluno)) {
+          // avisar usuario que transacao foi feita com sucesso
+%>
+          Transação realizada com sucesso!
+
+          <form action="./login.jsp" method="post">
+             <input type="submit" name="voltar" value="Voltar" />
+          </form>
+<%              } else {
+%>
+          Erro ao excluir perfil            
+          <form action="./removerPerfil.jsp" method="post">
+             <input type="submit" name="retry" value="Repetir" />
+          </form>
+    <%     }
                     
                 }
                 else { if ("professor".equals(vinculo)) {
+                    transacoes.Professor tp = new transacoes.Professor();
+                    data.ProfessorDO professor = tp.buscar(usuario.getId());
+                    
+                    tu.excluir(usuario);
+                    tp.excluir(professor);
+                    if (tp.excluir(professor)&&tu.excluir(usuario)) {
+          // avisar usuario que transacao foi feita com sucesso
+            %>
+                Transação realizada com sucesso!
 
-                 
+                        <form action="./login.jsp" method="post">
+                            <input type="submit" name="voltar" value="Voltar" />
+                        </form>
+            <%
+            } else  {
+                %>
+                    Erro ao excluir perfil            
+                    <form action="./removerPerfil.jsp" method="post">
+                        <input type="submit" name="retry" value="Repetir" />
+                     </form>
+                <%    
+                    }
+
                     }
                 }
             }

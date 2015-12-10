@@ -1,5 +1,5 @@
 <%-- 
-    Document   : cadastraProfessor
+    Document   : cadastraAssistente
     Created on : 29/11/2015, 11:49:59
     Author     : Humberto
 --%>
@@ -12,7 +12,7 @@
     <head>
         <link rel="stylesheet" href="CSS/styles.css" type="text/css" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Cadastrar Professor</title>
+        <title>Cadastrar Assistente</title>
     </head>
     
     <body>
@@ -33,7 +33,7 @@
             <section id="content" class="column-right">
                   		
         	<article>        
-                    <h1>Tela de cadastro de professor</h1>&nbsp;&nbsp; 
+                    <h1>Tela de cadastro de assistente</h1>&nbsp;&nbsp; 
 			  
                     <fieldset>
                         <legend>Informe seus dados cadastrais</legend>
@@ -109,35 +109,35 @@
             usuario.setSobrenome(sobrenome);
             usuario.setEmail(email);
             usuario.setSenha(senha);
-            usuario.setVinculo("professor");
+            usuario.setVinculo("assistente");
             
             if (tu.incluir(usuario)) {
                 usuario = tu.buscarNusp(nusp);
                 int id  = usuario.getId();
                 
-                transacoes.Professor tp = new transacoes.Professor();
-                data.ProfessorDO professor = new data.ProfessorDO();
+                transacoes.Assistente tp = new transacoes.Assistente();
+                data.AssistenteDO assistente = new data.AssistenteDO();
                 
-                professor.setId(id);
-                professor.setNusp(nusp);
-                professor.setEmail(email);
-                professor.setNome(nome);
-                professor.setSobrenome(sobrenome);
-                professor.setLattes(lattes);
-                professor.setInstituicao(instituicao);
-                professor.setDepartamento(departamento);
-                professor.setLaboratorio(laboratorio);
+                assistente.setId(id);
+                assistente.setNusp(nusp);
+                assistente.setEmail(email);
+                assistente.setNome(nome);
+                assistente.setSobrenome(sobrenome);
+                assistente.setLattes(lattes);
+                assistente.setInstituicao(instituicao);
+                assistente.setDepartamento(departamento);
+                assistente.setLaboratorio(laboratorio);
                 
-                if (tp.incluir(professor)) {
+                if (tp.incluir(assistente)) {
                     %>
                     <script type="text/JavaScript"> alert("Cadastro realizado com sucesso!"); </script>
                     <%
                     response.sendRedirect("login.jsp");
                 } 
-                else {  // caso de criar usuario e nao criar professor
+                else {  // caso de criar usuario e nao criar assistente
                     tu.excluir(usuario);
                 %>
-                <script type="text/JavaScript"> alert("Erro no cadastro: professor!"); </script>
+                <script type="text/JavaScript"> alert("Erro no cadastro: assistente!"); </script>
                 <%
                 }
             } else { // caso o cadastro nao for completado

@@ -31,19 +31,20 @@
                     if (null == nusp_logado) {
                 %>
                 <nav id="mainnav"> <ul>
-                    <li class="selected-item"><a href="index.jsp">Home</a></li>
+                    <li><a href="index.jsp">Home</a></li>
                     <li><a href="login.jsp">Login</a></li>
-                    <li><a href="sobreNos.jsp">Sobre n&oacute;s</a></li>
+                    <li class="selected-item"><a href="#">Sobre n&oacute;s</a></li>
                 </ul> </nav>
                 <%  // Barra lateral para logado
                     } else {
                 %>
                 <nav id="mainnav"> <ul>
                     <li><a href="index.jsp">Home</a></li>
-                    <li class="selected-item"><a href="#">Perfil</a></li>
+                    <li><a href="visualizarPerfil.jsp">Perfil</a></li>
                     <li><a href="pesquisa.jsp">Pesquisa</a></li>
-                    <li><a href="login.jsp?acao=logout">Logout</a></li>
-                    <li><a href="sobreNos.jsp">Sobre n&oacute;s</a></li>
+                    <li><a href="mensagem.jsp">Correio</a></li>
+                    <li><a href="logout.jsp">Logout</a></li>
+                    <li class="selected-item"><a href="#">Sobre n&oacute;s</a></li>
                 </ul> </nav>
                 <%
                     }
@@ -54,15 +55,16 @@
         	<article>
         
                     <h1>Sobre n&oacute;s</h1>
-                    <p>Essa &eacute; a <strong>PoliNet</strong>, desenvolvidas por alunos extremamente fatigados.</p>		
+                    <p>Essa é a <b>PoliNet</b>, uma rede que conecta alunos e professores para a divulgação de oportunidades de pesquisa dentro da Escola Politécnica.</p>
+                    <p>A <b>PoliNet</b> foi desenvolvida por um grupo de alunos da Engenharia Mecatrônica para a disciplina de Sistemas de Informação</p>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
                     <img src="images/usp_relogio_red.jpg" class="resize" alt="" />
         
         	</article>
-                
-                <form align="center" action="VizualizarPerfil.jsp" method="GET">
-                    ID: <input type="text" name="UserID"/>
-                    <input type="submit" value="EnviaID"/>
-                </form>
+               
         			
         	<footer class="clear">
                     <p>&copy; 2015 PoliNet. Desenvolvido para a disciplina PMR 2490 - Sistemas de Informa&ccedil;&atilde;o</p>

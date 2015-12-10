@@ -9,7 +9,7 @@ public class Aluno extends Usuario {
   public boolean incluir (AlunoDO aluno) throws Exception{
 
      // validacao das regras de negocio
-     if ( (isEmpty(aluno.getNusp())) || ( isEmpty(aluno.getEmail())) || ( isEmpty(aluno.getNome())) || ( isEmpty(aluno.getSobrenome())) || ( isEmpty(aluno.getVinculo())) ) {
+     if ( (isEmpty(aluno.getNusp())) || ( isEmpty(aluno.getEmail())) || ( isEmpty(aluno.getNome())) || ( isEmpty(aluno.getSobrenome())) ) {
        return false;
      }
 

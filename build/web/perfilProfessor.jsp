@@ -13,6 +13,12 @@
 <%@ page import="transacoes.Vinculo"  %>
 <%@ page import="data.VinculoDO"      %>
 
+<%@ page import="transacoes.Projeto"  %>
+<%@ page import="data.ProjetoDO"      %>
+
+<%@ page import="transacoes.Laboratorio"  %>
+<%@ page import="data.LaboratorioDO"      %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -74,7 +80,8 @@
                     <li><a href="index.jsp">Home</a></li>
                     <li class="selected-item"><a href="#">Perfil</a></li>
                     <li><a href="pesquisa.jsp">Pesquisa</a></li>
-                    <li><a href="login.jsp">Logout</a></li>
+                    <li><a href="mensagem.jsp">Correio</a></li>
+                    <li><a href="logout.jsp">Logout</a></li>
                     <li><a href="sobreNos.jsp">Sobre n&oacute;s</a></li>
                 </ul> </nav>
             </aside>
@@ -85,11 +92,11 @@
         	    
                     <p id="paginaURL"></p>
 				
-                    <h1>Nome completo: <%= nome +" "+ sobrenome %></h1>
+                    <h1><%= nome +" "+ sobrenome %></h1>
                     <p>
                     <p2>E-mail: <%= email %> <br /></p2>   
                     <p2>Institui&ccedil;&atilde;o: <%= instituicao %> <br /></p2>
-                    <p2>Descri&ccedil;&atilde;o do usu&aacute;rio: atolado de trabalhos <br />
+                    <p2>Descri&ccedil;&atilde;o do usu&aacute;rio: Professor titular e coordenador de laboratório <br />
                     <p2>N&uacute;mero USP: <%= nusp %> <br /></p2>
                     <p2>Link Currículo Lattes: <%= link_lattes %> <br /></p2>
                     <p2>Instituição: <%= instituicao %> <br /></p2>
@@ -99,33 +106,47 @@
 
         	</article>
                     
-<%
+
+<%  
     Vinculo v = new Vinculo();
     Vector vinculos = v.buscarPorUserId(id);
-    VinculoDO vinculo1 = (VinculoDO) vinculos.elementAt(0);
-    VinculoDO vinculo2 = (VinculoDO) vinculos.elementAt(1);
-    int id_pro1 = vinculo1.getIdProjeto();
-    int id_pro2 = vinculo2.getIdProjeto();
     
+    if ( (vinculos != null) && (vinculos.size() != 0)){
+        
+        %>
+                    <fieldset>
+            <legend>Pesquisas de <%=nome%></legend>
+            <table border="1">
+                <tr>
+                    <td><b>Pesquisa</b></td>
+                    <td><b>Laboratório</b></td>
+                    <td><b>Link</b></td>
+                </tr>
+        <%
+    for(int i = 0; i < vinculos.size(); i++) {
+        VinculoDO vinculo = (VinculoDO)vinculos.elementAt(i);
+        
+        Projeto p = new Projeto();
+        ProjetoDO projeto = p.pesquisa_id(vinculo.getIdProjeto());
+        
+        Laboratorio l = new Laboratorio();
+        LaboratorioDO lab = l.buscar(vinculo.getIdLab());
+        
+%>                  
+                    <tr>
+                         <td><%= projeto.getTitulo() %></td>
+                         <td><%= lab.getNome()%></td>
+                         <td><a href=pesquisa.jsp?visualizar=projeto&id=<%= projeto.getId()%>>Visualizar Projeto</a></td>
+      
+                    </tr>        
+<%                      }   
+%>          </table>    
+            </fieldset>
+<% }
 %>
 
-                <fieldset>
-                    <legend>Pesquisas</legend>
-                    <table border="1" >
-                       <tr>
-                            <td width="80px">T&iacute;tulo: Oportunidade de pesquisa 1</td>
-                            <td>Descri&ccedil;&atilde;o: <%= id_pro1%> </td>
-                       </tr>
-                       <tr>
-                            <td>T&iacute;tulo: Oportunidade de pesquisa 2</td>
-                            <td>Descri&ccedil;&atilde;o: <%= id_pro2%> </td>
-                       </tr>
-                    </table>
-
-                </fieldset>
-                    <br/>
-
-                    <img src="images/usp_relogio_red.jpg" class="resize" alt="" />
+<br/>                     
+<img src="images/usp_relogio_red.jpg" class="resize" alt="" />
         	
                 <footer class="clear">
                     <p>&copy; 2015 PoliNet. Desenvolvido para a disciplina PMR 2490 - Sistemas de Informa&ccedil;&atilde;o</p>

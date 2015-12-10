@@ -46,6 +46,7 @@
                     <li><a href="index.jsp">Home</a></li>
                     <li class="selected-item"><a href="#">Perfil</a></li>
                     <li><a href="pesquisa.jsp">Pesquisa</a></li>
+                    <li><a href="mensagem.jsp">Correio</a></li>
                     <li><a href="login.jsp">Logout</a></li>
                     <li><a href="sobreNos.jsp">Sobre n&oacute;s</a></li>
                 </ul> </nav>

@@ -8,15 +8,15 @@ public class AlunoData extends UsuarioData{
 
   public void incluir(AlunoDO aluno, Transacao tr) throws Exception {
      Connection con = tr.obterConexao();
-     String sql = "insert into aluno (nusp, email, nome, sobrenome, link_lattes, instituicao, codigo_CV, codigo_hist) values (?, ?, ?, ?, ?, ?, ?, ?)";
+     String sql = "insert into aluno (id, nusp, email, nome, sobrenome, link_lattes, instituicao, codigo_hist) values (?, ?, ?, ?, ?, ?, ?, ?)";
      PreparedStatement ps = con.prepareStatement(sql);
-     ps.setString(1, aluno.getNusp());
-     ps.setString(2, aluno.getEmail());
-     ps.setString(3, aluno.getNome());
-     ps.setString(4, aluno.getSobrenome());
-     ps.setString(5, aluno.getLattes());
-     ps.setString(6, aluno.getInstituicao());
-     ps.setString(7, aluno.getCv());
+     ps.setInt(1, aluno.getId());
+     ps.setString(2, aluno.getNusp());
+     ps.setString(3, aluno.getEmail());
+     ps.setString(4, aluno.getNome());
+     ps.setString(5, aluno.getSobrenome());
+     ps.setString(6, aluno.getLattes());
+     ps.setString(7, aluno.getInstituicao());
      ps.setString(8, aluno.getHist());
      int result = ps.executeUpdate();
   }

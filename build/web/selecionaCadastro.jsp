@@ -40,12 +40,13 @@
 
                     <FORM name="form1" onsubmit="verificaEntrada()" method="post">
                         <p><label for="text">N&uacute;mero USP:</label>
-                        <input type="text" name="nusp" id="nusp" value=""/><br /></p>
+                        <input type="text" name="nusp" value=""/><br /></p>
 
-                        <p><input name="selecao" type="radio" id="aluno" /> Aluno &nbsp; 
-                        <input name="selecao" type="radio" id="professor" /> Professor<br/></p>
+                        <p><input name="selecao" type="radio" value="aluno" /> Aluno &nbsp; 
+                        <input name="selecao" type="radio" value="professor" /> Professor<br/></p>
 
                         <p><INPUT type="submit" class="formbutton" value="Selecionar"></p>
+                        <input type="hidden" name="selecionou" value="true" />
 
                     </FORM>
                 </fieldset>	
@@ -61,19 +62,21 @@
         </section>
         <div class="clear"></div>
     </section>
-	
-        <script type="text/javascript">
-            function verificaEntrada() {
-
-               if (document.getElementById("aluno").checked) {
-                      document.form1.action = "cadastraAluno.jsp";
-                } else { 
-                    if (document.getElementById("professor").checked) {
-                      document.form1.action = "cadastraProfessor.jsp";
-                      // alert("puff");
-                    }
-                }
+<%
+    if ("true".equals(request.getParameter("selecionou"))) {
+        
+        String nusp = request.getParameter("nusp");
+        if ("aluno".equals(request.getParameter("selecao"))) {
+            response.sendRedirect("cadastraAluno.jsp?nusp=" + nusp);
+        } else {
+            if ("professor".equals(request.getParameter("selecao"))) {
+                response.sendRedirect("cadastraProfessor.jsp?nusp=" + nusp);
             }
-        </script>
+        }
+        // falta cadastraAssistente ??
+    }
+            
+            
+%>
     </body>
 </html>

@@ -82,6 +82,23 @@ public class UsuarioData {
      usuario.setSenha (rs.getString("senha"));
      return usuario;
   } // buscarNusp
+  public UsuarioDO buscarEmail(String email, Transacao tr) throws Exception {
+     Connection con = tr.obterConexao();
+     String sql = "select * from usuario where email=?";
+     PreparedStatement ps = con.prepareStatement(sql);
+     ps.setString(1, email);
+     ResultSet rs = ps.executeQuery();
+     rs.next();
+     UsuarioDO usuario = new UsuarioDO();
+     usuario.setId (rs.getInt("id"));
+     usuario.setNusp (rs.getString("nusp"));
+     usuario.setEmail (rs.getString("email"));
+     usuario.setNome (rs.getString("nome"));
+     usuario.setSobrenome (rs.getString("sobrenome"));
+     usuario.setVinculo (rs.getString("vinculo"));
+     usuario.setSenha (rs.getString("senha"));
+     return usuario;
+  } // buscarEmail
 
   public Vector pesquisarPorNusp(String nusp, Transacao tr) throws Exception {  // alteracao Fuess -- passa de Vector para UsuarioDO
      Connection con = tr.obterConexao();

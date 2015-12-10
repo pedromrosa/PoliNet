@@ -81,6 +81,21 @@ public class Usuario {
 	 }
 	 return null;
   } // buscar
+    public UsuarioDO buscarEmail(String email) throws Exception{
+     Transacao tr = new Transacao();
+	 try{
+	   tr.beginReadOnly();
+  	     UsuarioData udata = new UsuarioData();
+	     UsuarioDO u = udata.buscarEmail(email, tr);
+	   tr.commit();
+	   return u;
+	 } catch (Exception e) {
+	   tr.rollback();
+	   System.out.println("erro ao buscar" + email);
+	   e.printStackTrace();
+	 }
+	 return null;
+  } // buscar
     
     //--------PESQUISA DE PERFIL POR NOME-------- 18:30 07/12 -- Fuess
      public Vector buscar(String nome) throws Exception{

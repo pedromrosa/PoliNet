@@ -1,16 +1,24 @@
 <%-- 
-    Document   : selecionaCadastro
-    Created on : 29/11/2015, 11:39:50
-    Author     : Humberto
+    Document   : gerenciaProjeto
+    Created on : 08/12/2015, 04:18:35
+    Author     : Marcos
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.util.Vector"  %>
+<%@ page import="transacoes.Projeto"%>
+<%@ page import="transacoes.Professor"%>
+    
+<%@ page import="data.ProjetoDO"  %>
+<%@ page import="data.ProfessorDO"  %>
+
 <!DOCTYPE html>
+
 <html>
     <head>
         <link rel="stylesheet" href="CSS/styles.css" type="text/css" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Seleciona Cadastro</title>
+        <title>Gerencia Projeto</title>
     </head>
     <body>
         
@@ -32,22 +40,19 @@
                   		
             <article>
 
-                <h2>Sele&ccedil;&atilde;o de cadastro</h2>&nbsp;&nbsp; 
-                <p>Entre com o seu n&uacute;mero USP para valida&ccedil;&atilde;o de cadastro no banco de dados. Depois, informe se &eacute; aluno ou professor.</p>
+                <h2>Na ger&ecirc;ncia do projeto</h2>&nbsp;&nbsp; 
+                <p>Aqui pode ser feita a administra&ccedil;&atilde;o de seus projetos.</p>
 
                 <fieldset>
-                    <legend>Escolha o tipo de cadastro</legend>
+                    <legend>Funcionalidades</legend>
 
                     <FORM name="form1" onsubmit="verificaEntrada()" method="post">
-                        <p><label for="text">N&uacute;mero USP:</label>
-                        <input type="text" name="nusp" value=""/><br /></p>
-
-                        <p><input name="selecao" type="radio" value="aluno" /> Aluno &nbsp; 
-                        <input name="selecao" type="radio" value="professor" /> Professor<br/></p>
-
-                        <p><INPUT type="submit" class="formbutton" value="Selecionar"></p>
-                        <input type="hidden" name="selecionou" value="true" />
-
+                        
+                        <p><a href="cadastraProjeto.jsp">Cadastro de novos projetos</a>
+                                <br />
+                        <p><a href="editaProjeto.jsp">Edi&ccedil;&atilde;ode novos projetos</a>
+                                <br />
+                      
                     </FORM>
                 </fieldset>	
 
@@ -62,21 +67,19 @@
         </section>
         <div class="clear"></div>
     </section>
-<%
-    if ("true".equals(request.getParameter("selecionou"))) {
-        
-        String nusp = request.getParameter("nusp");
-        if ("aluno".equals(request.getParameter("selecao"))) {
-            response.sendRedirect("cadastraAluno.jsp?nusp=" + nusp);
-        } else {
-            if ("professor".equals(request.getParameter("selecao"))) {
-                response.sendRedirect("cadastraProfessor.jsp?nusp=" + nusp);
+	
+        <script type="text/javascript">
+            function verificaEntrada() {
+
+               if (document.getElementById("aluno").checked) {
+                      document.form1.action = "cadastraAluno.jsp";
+                } else { 
+                    if (document.getElementById("professor").checked) {
+                      document.form1.action = "cadastraProfessor.jsp";
+                      // alert("puff");
+                    }
+                }
             }
-        }
-        // falta cadastraAssistente ??
-    }
-            
-            
-%>
+        </script>
     </body>
 </html>
