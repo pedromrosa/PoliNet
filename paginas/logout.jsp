@@ -7,9 +7,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
+<html>
+    <body>
+        <script type="text/JavaScript"> alert("Você saiu da sessão!"); </script>
 
-<script type="text/JavaScript"> alert("Você saiu da sessão!"); </script>
+        <% session.invalidate();    %>
 
-<% session.invalidate();    %>
-
-<% response.sendRedirect("index.jsp"); %>
+        <% response.sendRedirect("index.jsp"); %>
+    </body>
+</html>

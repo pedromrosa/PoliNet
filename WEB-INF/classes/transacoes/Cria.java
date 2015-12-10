@@ -40,7 +40,6 @@ public class Cria{
     public boolean excluirCria(CriaDO cria) throws Exception {
         Transacao tr = new Transacao();
         try {
-            // inserir validacoes de regras de negocio
             tr.begin();
             CriaData data = new CriaData();
             data.excluirCria(cria.getIdProjeto(), cria.getIdProf(), tr);
@@ -49,6 +48,22 @@ public class Cria{
         } catch (Exception e) {
             tr.rollback();
             System.out.println("erro ao excluir");
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    public boolean compara(int id_professor, int id_projeto) {
+        Transacao tr = new Transacao();
+        try {
+            tr.begin();
+            CriaData cdata = new CriaData();
+            CriaDO cria = cdata.comparar(id_professor, id_projeto, tr);
+            tr.commit();
+            if (null != cria)
+                return true;
+        } catch (Exception e) {
+            System.out.println("erro ao comparar");
             e.printStackTrace();
         }
         return false;

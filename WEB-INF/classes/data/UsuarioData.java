@@ -86,7 +86,7 @@ public class UsuarioData {
      Connection con = tr.obterConexao();
      String sql = "select * from usuario where email=?";
      PreparedStatement ps = con.prepareStatement(sql);
-     ps.setString(1, email);
+     ps.setString(1, "%" + email + "%");
      ResultSet rs = ps.executeQuery();
      rs.next();
      UsuarioDO usuario = new UsuarioDO();
@@ -146,8 +146,8 @@ public class UsuarioData {
      Connection con = tr.obterConexao();
      String sql = "select * from usuario where nome like ? or sobrenome like ?";
      PreparedStatement ps = con.prepareStatement(sql);
-     ps.setString(1, nome);
-     ps.setString(2, nome);
+     ps.setString(1, "%" + nome + "%");
+     ps.setString(2, "%" + nome + "%");
      ResultSet rs = ps.executeQuery();
      System.out.println("query executada");
      Vector usuarios = new Vector();

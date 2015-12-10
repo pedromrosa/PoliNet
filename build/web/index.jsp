@@ -1,7 +1,7 @@
 <%-- 
     Document   : index
     Created on : 01/10/2009, 18:29:29
-    Author     : MB
+    Author     : 
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -58,7 +58,7 @@
         	<article>
         
                     <h1>Seja bem vindo!!</h1>
-                    <p>Essa &eacute; a <strong>PoliNet</strong>, onde voc&ecirc; encontra a oportunidade de pesquisa mais adequada &agrave; voc&ecirc;.</p>		
+                    <p>Essa &eacute; a <strong>PoliNet</strong>, onde voc&ecirc; encontra a oportunidade de pesquisa mais adequada a voc&ecirc;.</p>		
                     
                     
                     <fieldset>

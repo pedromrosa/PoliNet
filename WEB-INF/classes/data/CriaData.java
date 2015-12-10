@@ -25,6 +25,21 @@ public class CriaData{
     System.out.println("apagado com sucesso");
   } // excluir 
 
+  public CriaDO comparar(int id_professor, int id_projeto, Transacao tr) throws Exception {
+      Connection con = tr.obterConexao();
+      String sql = "select * from cria where id_professor like ? AND id_projeto like ?";
+      PreparedStatement ps = con.prepareStatement(sql);
+      ps.setInt(1, id_professor);
+      ps.setInt(2, id_projeto);
+      ResultSet rs = ps.executeQuery();
+      rs.next();
+      
+      CriaDO cria = new CriaDO();
+      cria.setIdProf (rs.getInt("id_professor"));
+      cria.setIdProjeto (rs.getInt("id_projeto"));
+      
+      return cria;
+  }
   public Vector procurar_projetos(int id_professor, Transacao tr) throws Exception {
     Connection con = tr.obterConexao();
     String sql = "select * from cria where id_professor=?";

@@ -73,7 +73,7 @@
                     <li class="selected-item"><a href="#">Perfil</a></li>
                     <li><a href="pesquisa.jsp">Pesquisa</a></li>
                     <li><a href="mensagem.jsp">Correio</a></li>
-                    <li><a href="login.jsp?UserId=<%=userId%>&acao=logout">Logout</a></li>
+                    <li><a href="logout.jsp">Logout</a></li>
                     <li><a href="sobreNos.jsp">Sobre n&oacute;s</a></li>
                 </ul> </nav>
             </aside>
@@ -96,6 +96,7 @@
 
         	</article>
 
+        <!-- Verificar as pesquisas relacionadas -->
 <%  
     Vinculo v = new Vinculo();
     Vector vinculos = v.buscarPorUserId(id);

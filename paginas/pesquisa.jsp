@@ -1,8 +1,9 @@
 <%-- 
     Document   : pesquisa
-    Created on : 08/12/2015, 19:16:33
-    Author     : Heitor
+    Created on : 10/12/2015, 15:40:33
+    Author     : Pedro
 --%>
+
 <%@ page import="data.ProjetoDO" %>
 <%@ page import="data.LaboratorioDO" %>
 <%@ page import="java.util.Vector" %>
@@ -16,25 +17,20 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Tela de pesquisa</title>
     </head>
-    
     <body>
-    
 	<section id="body" class="width">
             <aside id="sidebar" class="column-left">
-
                 <header>
                     <h1><a href="#">PoliNet</a></h1>
                     <h2>Seja bem vindo!</h2>
-                </header>
-			
+                </header>		
                 <h1 align="right">Usu&aacute;rio</h1>
-
                 <nav id="mainnav"> <ul>
                     <li><a href="index.jsp">Home</a></li>
                     <li><a href="usuario.jsp">Perfil</a></li>
                     <li class="selected-item"><a href="#">Pesquisa</a></li>
                     <li><a href="mensagem.jsp">Correio</a></li>
-                    <li><a href="login.jsp">Logout</a></li>
+                    <li><a href="logout.jsp">Logout</a></li>
                     <li><a href="sobreNos.jsp">Sobre n&oacute;s</a></li>
                 </ul> </nav>
             </aside>
@@ -47,17 +43,17 @@
                     <p> Entre com o campo de pesquisa</p>&nbsp;
 			  
                     <fieldset>
-                        <legend>Formul&aacute;rio de pesquisa</legend>
+                        <legend>Diret&oacute;rio de Projetos e Laboratórios</legend>
                         <FORM action="" method="post">
 				
                         <p>Selecione o campo a ser pesquisado:<label for="text"></label>
                             <select name="campoPesquisa">
                                 <option value="vazio" selected="selected" />
-                                <option value="perfil">por perfil</option>
-                                <option value="laboratorio nome">por laborat&oacute;rio nome</option>
-                                <option value="laboratorio departamento">por laborat&oacute;rio departamento</option>
-                                <option value="titulo projeto">por título do projeto</option>
-                                <option value="keyword">por palavra-chave do projeto</option>
+                                <option value="perfil">Nome do perfil</option>
+                                <option value="laboratorio nome">Nome do laborat&oacute;rio</option>
+                                <option value="laboratorio departamento">Departamento (laborat&oacute;rio)</option>
+                                <option value="titulo projeto">T&iacute;tulo do projeto</option>
+                                <option value="keyword">Palavra-chave do projeto</option>
                             </select></p>
   
                         <p><label for="text">Pesquisa:</label>

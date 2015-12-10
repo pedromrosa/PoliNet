@@ -93,7 +93,7 @@ public class ProjetoData {
      Connection con = tr.obterConexao();
      String sql = "select * from projeto where titulo=?";
      PreparedStatement ps = con.prepareStatement(sql);
-     ps.setString(1, titulo);
+     ps.setString(1, "%" + titulo + "%");
      ResultSet rs = ps.executeQuery();
      System.out.println("query executada");
      Vector projetos = new Vector();
@@ -121,9 +121,9 @@ public class ProjetoData {
      Connection con = tr.obterConexao();
      String sql = "select * from projeto where palavra_chave1 like ? or palavra_chave2 like ? or palavra_chave3 like ?";
      PreparedStatement ps = con.prepareStatement(sql);
-     ps.setString(1, kw);
-     ps.setString(2, kw);
-     ps.setString(3, kw);
+     ps.setString(1, "%" + kw + "%");
+     ps.setString(2, "%" + kw + "%");
+     ps.setString(3, "%" + kw + "%");
      ResultSet rs = ps.executeQuery();
      System.out.println("query executada");
      Vector projetos = new Vector();

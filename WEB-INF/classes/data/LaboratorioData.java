@@ -56,7 +56,7 @@ public class LaboratorioData {
      Connection con = tr.obterConexao();
      String sql = "select * from lab where nome like ?";
      PreparedStatement ps = con.prepareStatement(sql);
-     ps.setString(1, nome);
+     ps.setString(1, "%" + nome + "%");
      ResultSet rs = ps.executeQuery();
      System.out.println("query executada");
      Vector labs = new Vector();

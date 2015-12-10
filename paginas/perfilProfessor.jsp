@@ -40,14 +40,6 @@
         pageContext.forward("login.jsp");
     }
     
-    // Acao dar logout
-//    String acao = request.getParameter("acao");
-//    if (acao.equals("logout")) {
-//        session.invalidate();
-//        response.sendRedirect("index.jsp");
-//        
-//    }
-
     // Busca usuario por ID
     String userId = request.getParameter("UserId");
     int id = Integer.parseInt(userId);

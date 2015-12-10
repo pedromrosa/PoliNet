@@ -3,9 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/pedro/Documents/GitHub/PoliNet/WEB-INF/classes/data/CandidataDO.java</file>
-            <file>file:/D:/pedro/Documents/GitHub/PoliNet/paginas/perfilAluno.jsp</file>
-            <file>file:/D:/pedro/Documents/GitHub/PoliNet/paginas/pesquisa.jsp</file>
+            <file>file:/D:/Pedro/Documents/GitHub/PoliNet/paginas/pesquisa.jsp</file>
+            <file>file:/D:/Pedro/Documents/GitHub/PoliNet/WEB-INF/classes/transacoes/Projeto.java</file>
+            <file>file:/D:/Pedro/Documents/GitHub/PoliNet/WEB-INF/classes/data/ProjetoDO.java</file>
+            <file>file:/D:/Pedro/Documents/GitHub/PoliNet/paginas/index.jsp</file>
+            <file>file:/D:/Pedro/Documents/GitHub/PoliNet/paginas/login.jsp</file>
+            <file>file:/D:/Pedro/Documents/GitHub/PoliNet/paginas/cadastraProjeto.jsp</file>
+            <file>file:/D:/Pedro/Documents/GitHub/PoliNet/paginas/pesquisaMenu.jsp</file>
+            <file>file:/D:/Pedro/Documents/GitHub/PoliNet/WEB-INF/classes/data/CandidataDO.java</file>
+            <file>file:/D:/Pedro/Documents/GitHub/PoliNet/paginas/perfilAluno.jsp</file>
+            <file>file:/D:/Pedro/Documents/GitHub/PoliNet/paginas/logout.jsp</file>
+            <file>file:/D:/Pedro/Documents/GitHub/PoliNet/WEB-INF/classes/transacoes/Cria.java</file>
+            <file>file:/D:/Pedro/Documents/GitHub/PoliNet/paginas/mensagem.jsp</file>
         </group>
     </open-files>
 </project-private>

@@ -39,14 +39,6 @@
         <%
         pageContext.forward("login.jsp");
     }
-
-    // Acao dar logout      FALTA implementar
-//    String acao = request.getParameter("acao");
-//    if (acao.equals("logout")) {
-//        session.invalidate();
-//        response.sendRedirect("index.jsp");
-//        
-//    }
         
     // Busca usuario por ID
     String userId = request.getParameter("UserId");
