@@ -99,7 +99,8 @@
                     <p2>Departamento: <%= departamento %> <br /></p2>   
                     <p2>Laboratório: <%= laboratorio %> <br /></p2>   
                     </p>		
-
+                    
+                    <a class="button" href="gerenciarProjeto.jsp">Gerenciar Projeto</a>
         	</article>
                     
 
@@ -255,6 +256,7 @@
         response.sendRedirect("visualizarPerfil.jsp");
     } //fim da atualização
 %>
+
 
 <br/>                     
 <img src="images/usp_relogio_red.jpg" class="resize" alt="" />
