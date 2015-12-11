@@ -67,31 +67,34 @@ public class ProjetoData {
   } // buscar
   
   //17:20 07/12
-  public ProjetoDO buscarIdLab(int idlab, Transacao tr) throws Exception {
+  public Vector buscarIdLab(int idlab, Transacao tr) throws Exception {
      Connection con = tr.obterConexao();
      String sql = "select * from projeto where id_lab=?";
      PreparedStatement ps = con.prepareStatement(sql);
      ps.setInt(1, idlab);
      ResultSet rs = ps.executeQuery();
-     rs.next();
-     ProjetoDO projeto = new ProjetoDO();
-     projeto.setId (rs.getInt("id"));
-     projeto.setTitulo (rs.getString("titulo"));
-     projeto.setDescricao (rs.getString("descricao"));
-     projeto.setKW1 (rs.getString("palavra_chave1"));
-     projeto.setKW2 (rs.getString("palavra_chave2"));
-     projeto.setKW3 (rs.getString("palavra_chave3"));
-     projeto.setInicio (rs.getInt("semestre_inicio"));
-     projeto.setFim (rs.getInt("semestre_fim"));
-     projeto.setLab (rs.getInt("id_lab"));
-     projeto.setPatrocinador (rs.getString("patrocinador"));
-     return projeto;
+     Vector projetos = new Vector();
+     while (rs.next()) {
+        ProjetoDO projeto = new ProjetoDO();
+        projeto.setId (rs.getInt("id"));
+        projeto.setTitulo (rs.getString("titulo"));
+        projeto.setDescricao (rs.getString("descricao"));
+        projeto.setKW1 (rs.getString("palavra_chave1"));
+        projeto.setKW2 (rs.getString("palavra_chave2"));
+        projeto.setKW3 (rs.getString("palavra_chave3"));
+        projeto.setInicio (rs.getInt("semestre_inicio"));
+        projeto.setFim (rs.getInt("semestre_fim"));
+        projeto.setLab (rs.getInt("id_lab"));
+        projeto.setPatrocinador (rs.getString("patrocinador"));
+        projetos.add(projeto);
+    }
+     return projetos;
   } // buscar_idlab
   
   //17:05 07/12
   public Vector pesquisarPorTitulo(String titulo, Transacao tr) throws Exception{
      Connection con = tr.obterConexao();
-     String sql = "select * from projeto where titulo=?";
+     String sql = "select * from projeto where titulo like ?";
      PreparedStatement ps = con.prepareStatement(sql);
      ps.setString(1, "%" + titulo + "%");
      ResultSet rs = ps.executeQuery();

@@ -27,7 +27,7 @@ public class CriaData{
 
   public CriaDO comparar(int id_professor, int id_projeto, Transacao tr) throws Exception {
       Connection con = tr.obterConexao();
-      String sql = "select * from cria where id_professor like ? AND id_projeto like ?";
+      String sql = "select * from cria where id_professor=? AND id_projeto=?";
       PreparedStatement ps = con.prepareStatement(sql);
       ps.setInt(1, id_professor);
       ps.setInt(2, id_projeto);

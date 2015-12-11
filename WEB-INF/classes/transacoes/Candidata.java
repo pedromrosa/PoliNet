@@ -54,6 +54,23 @@ public class Candidata{
         return false;
     }
 
+    public boolean compara(int id_aluno, int id_projeto) throws Exception {
+        Transacao tr = new Transacao();
+        try {
+            tr.beginReadOnly();
+            CandidataData cdata = new CandidataData();
+            CandidataDO candidata = cdata.verifica_aluno(id_aluno, id_projeto, tr);
+            tr.commit();
+            if (null != candidata) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println("erro ao comparar");
+            e.printStackTrace();
+        }
+        return false;
+    }    
+    
     public Vector pesquisar_projetos(int id_aluno) {
     if (id_aluno == 0)
         return null;

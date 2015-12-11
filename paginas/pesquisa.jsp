@@ -26,7 +26,7 @@
                 <h1 align="right">Usu&aacute;rio</h1>
                 <nav id="mainnav"> <ul>
                     <li><a href="index.jsp">Home</a></li>
-                    <li><a href="usuario.jsp">Perfil</a></li>
+                    <li><a href="visualizarPerfil.jsp">Perfil</a></li>
                     <li class="selected-item"><a href="#">Pesquisa</a></li>
                     <li><a href="pesquisaMenu.jsp">Diret&oacute;rio</a></li>
                     <li><a href="mensagem.jsp">Correio</a></li>

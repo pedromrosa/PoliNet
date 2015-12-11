@@ -56,7 +56,7 @@ public class Cria{
     public boolean compara(int id_professor, int id_projeto) {
         Transacao tr = new Transacao();
         try {
-            tr.begin();
+            tr.beginReadOnly();
             CriaData cdata = new CriaData();
             CriaDO cria = cdata.comparar(id_professor, id_projeto, tr);
             tr.commit();

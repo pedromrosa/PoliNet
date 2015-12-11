@@ -11,6 +11,11 @@
 <%@ page import="transacoes.Mensagem" %>
 <%@ page import="data.MensagemDO" %>
 
+<%@ page import="data.UsuarioDO"    %>
+<%@ page import="data.AlunoDO"  %>
+<%@ page import="data.ProfessorDO"  %>
+
+
 <head>
         <link rel="stylesheet" href="CSS/styles.css" type="text/css" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -68,9 +73,18 @@
         <div class="clear"></div>
     </section>
 <%  if ("true".equals(request.getParameter("envia"))) {
+                    
+            String nusp_logado = (String)session.getAttribute("nusp_logado");
+            
+            transacoes.Usuario tu = new transacoes.Usuario();
+            data.UsuarioDO usuario = tu.buscarNusp(nusp_logado);
+            int id_envia = usuario.getId();
+            
             String titulo = request.getParameter("assunto");
             String receber = request.getParameter("destinatario");
             int id_recebe = Integer.parseInt(receber);
+            
+            
             String texto = request.getParameter("mensagem");
                           
         transacoes.Mensagem tn = new transacoes.Mensagem();
@@ -79,7 +93,8 @@
         msg.setRecebe(id_recebe);
         msg.setTitulo(titulo);
         msg.setTexto(texto);
-        
+        msg.setEnvia(id_envia);
+               
         if ( tn.incluir(msg)) {
           // avisar usuario que transacao foi feita com sucesso 
 %>
@@ -87,8 +102,8 @@
           <form action="./main.jsp" method="post">
              <input type="submit" name="voltar" value="Voltar" />
           </form>
-<%     
-        } else {   
+<%
+        } else {
 %>
           Erro no envio            
           <form action="./insert.jsp" method="post">

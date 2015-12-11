@@ -6,7 +6,6 @@
 package transacoes;
 
 import utils.*;
-import data.*;
 import data.ProjetoDO;
 import data.ProjetoData;
 import java.util.*;
@@ -58,13 +57,13 @@ public class Projeto {
   } // atualizar
 
   //-------------------PESQUISAR POR ID DO LABORATÓRIO-------------
-    public ProjetoDO pesquisa_id_lab(int id_lab) throws Exception {
+    public Vector pesquisa_id_lab(int id_lab) throws Exception {
      Transacao tr = new Transacao();
 	 try{
 	   // inserir validacoes de regras de negocio
 	   tr.begin();
   	     ProjetoData pdata = new ProjetoData();
-	     ProjetoDO p = pdata.buscarIdLab(id_lab, tr);
+	     Vector p = pdata.buscarIdLab(id_lab, tr);
 	   tr.commit();
 	   return p;
 	 } catch (Exception e) {

@@ -3,11 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/pedro/Documents/GitHub/PoliNet/WEB-INF/classes/transacoes/Laboratorio.java</file>
-            <file>file:/D:/pedro/Documents/GitHub/PoliNet/paginas/editarPerfil.jsp</file>
-            <file>file:/D:/pedro/Documents/GitHub/PoliNet/WEB-INF/classes/data/LaboratorioData.java</file>
-            <file>file:/D:/pedro/Documents/GitHub/PoliNet/paginas/gerenciaLab.jsp</file>
-            <file>file:/D:/pedro/Documents/GitHub/PoliNet/paginas/cadastraLab.jsp</file>
+            <file>file:/D:/pedro/Documents/GitHub/PoliNet/paginas/pesquisa.jsp</file>
+            <file>file:/D:/pedro/Documents/GitHub/PoliNet/paginas/visualizarProjeto.jsp</file>
+            <file>file:/D:/pedro/Documents/GitHub/PoliNet/paginas/perfilAssistente.jsp</file>
         </group>
     </open-files>
 </project-private>

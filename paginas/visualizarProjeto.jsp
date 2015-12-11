@@ -19,11 +19,16 @@
     </head>
     <body>
 <%  
+            // reconhece acao
+            String acao = request.getParameter("acao");
+
             // pega o nusp do usuario logado
             String nusp_logado = (String)session.getAttribute("nusp_logado");
-            // pega o Id do projeto
-            int projetoID = Integer.parseInt(request.getParameter("UserId"));
+            transacoes.Usuario tn = new transacoes.Usuario();
+            UsuarioDO usuario = tn.buscarNusp(nusp_logado);
             
+                // pega o Id do projeto
+                int projetoID = Integer.parseInt(request.getParameter("UserId"));        
                 transacoes.Projeto tu = new transacoes.Projeto();
                 data.ProjetoDO projeto = tu.pesquisa_id(projetoID);
                 
@@ -47,9 +52,9 @@
                 <h1 align="right">Projeto</h1>
                 <nav id="mainnav"> <ul>
                     <li><a href="index.jsp">Home</a></li>
-                    <li class="selected-item"><a href="#">Perfil</a></li>
-                    <li><a href="pesquisa.jsp">Pesquisa</a></li>
-                    <li><a href="login.jsp?UserId=<%=projetoID%>&acao=logout">Logout</a></li>
+                    <li><a href="visualizarPerfil.jsp">Perfil</a></li>
+                    <li class="selected-item"><a href="#">Pesquisa</a></li>
+                    <li><a href="logout.jsp">Logout</a></li>
                     <li><a href="sobreNos.jsp">Sobre n&oacute;s</a></li>
                 </ul> </nav>
             </aside>
@@ -69,43 +74,42 @@
                     <p2>Laborat&oacute;rio Vinculado (ID): <%= laboratorio %> <br /></p2>
                     <p2>Patrocinador: <%= patrocinador %> <br /></p2>
                     </p>
-<%                  
-                    transacoes.Usuario tn = new transacoes.Usuario();
-                    UsuarioDO usuario = tn.buscarNusp(nusp_logado);
-                    transacoes.Vinculo tn2 = new transacoes.Vinculo();
-                    Vector vinculos = tn2.buscarPorUserId(usuario.getId());
-                    if ((usuario.getVinculo()).equals("aluno")){
-%>
-                    <td><a href=visualizarProjeto.jsp?visualizar=candidato&UserId=<%= usuario.getId()%>>Candidatar-se ao Projeto</a></td>
-<%                  }
-                    if ((usuario.getVinculo()).equals("professor")){
-                        for(int i = 0; i < vinculos.size(); i++){
-                            VinculoDO vinculo = (VinculoDO)vinculos.elementAt(i);
-                            if (projetoID == vinculo.getIdProjeto()){
-%>
-                    <td><a href=visualizarProjeto.jsp?visualizar=candidatura&UserId=<%= usuario.getId()%>>Avaliar Candidaturas</a></td>
-<%
-                            }
+<%                                   
+                    // Verificacao do tipo de usuario logado
+                    if ((usuario.getVinculo()).equals("aluno") && acao == null) {
+                        transacoes.Candidata tc = new transacoes.Candidata();
+                        if (tc.compara(usuario.getId(), projetoID) == false) {
+                        %>
+                            <a class="button" href="visualizarProjeto.jsp?acao=candidatar&ProjId=<%= projetoID %>&UserId=<%= usuario.getId()%>">Candidatar-se ao Projeto</a>
+                        <%   
                         }
                     }
-%>
-                    <fieldset>
-<%                      if ("candidato".equals(request.getParameter("visualizar"))) {
-                            CandidataDO candidato = new CandidataDO();
-                            candidato.setIdAluno(usuario.getId());
-                            candidato.setIdProjeto(projetoID);
-                            transacoes.Candidata t1 = new transacoes.Candidata();
-                            t1.incluir(candidato);
+
+                    if ("professor".equals(usuario.getVinculo())) {
+                        transacoes.Cria tc = new transacoes.Cria();
+                        if (tc.compara(usuario.getId(), projetoID)) {
+                        %>
+                            <a class="button" href="verificaCandidatura.jsp?ProjId=<%=projetoID%>&UserId=<%=usuario.getId()%>">Avaliar candidatura(s)</a>
+                        <% 
+                        }
+                    }
+                    
+                    // Vericacao da acao
+                     if ("candidatar".equals(acao)) {
+                           
+                        CandidataDO candidato = new CandidataDO();
+                        
+                        // relaciona o id do usuario e do lab
+                        candidato.setIdAluno(usuario.getId());
+                        candidato.setIdProjeto(projetoID);
+                        
+                        transacoes.Candidata t1 = new transacoes.Candidata();
+                        t1.incluir(candidato);
 %>
                     <script type="text/JavaScript"> alert("Candidatura realizada com êxito!");</script>
 <%
                         }
-                        if ("candidatura".equals(request.getParameter("visualizar"))) {
-                            String ID = request.getParameter("id");
-                            response.sendRedirect("visualizarProjeto.jsp?UserId=" + ID);
-                        }
 %>
-                    </fieldset>
         	</article>
                     <br/>
                     <img src="images/usp_relogio_red.jpg" class="resize" alt="" />

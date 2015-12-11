@@ -29,12 +29,10 @@
                 <li><a href="login.jsp">Login</a></li>
                 <li><a href="sobreNos.jsp">Sobre n&oacute;s</a></li>
             </ul> </nav>
-                
-            </aside>
+        </aside>
     	<section id="content" class="column-right">
                   		
             <article>
-        
                 <h1>Tela de cadastro de aluno</h1>&nbsp;&nbsp; 
 			  
                 <fieldset>
@@ -51,7 +49,7 @@
                         <input type="text" name="email" value=""/><br /></p>
 
                         <p><label for="text">Senha:</label>
-						<input type="password" name="senha" value=""/><br /></p>
+			<input type="password" name="senha" value=""/><br /></p>
 				  
                         <p><label for="text">Institui&ccedil;&atilde;o:</label>
                             <select name="instituicao">

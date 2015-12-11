@@ -79,10 +79,16 @@
             </aside>
 	
 	    <section id="content" class="column-right">
-                  		
+
+    <!-- se for request inicial, mostra somente o perfil do aluno -->
+    <%     
+       String action = request.getParameter("action");
+       if ( null == action || action.equals("Voltar") ) {
+          action = "showPerfil";
+    %>                
         	<article>
         	    
-                    <p id="paginaURL"></p>
+<!--                <p id="paginaURL"></p>      -->
 				
                     <h1><%= nome +" "+ sobrenome %></h1>
                     <p>
@@ -90,7 +96,7 @@
                     <p2>Descri&ccedil;&atilde;o do usu&aacute;rio: Aluno dedicado e competente <br />
                     <p2>N&uacute;mero USP: <%= nusp %> <br /></p2>
                     <p2>Link Currículo Lattes: <%= link_lattes %> <br /></p2>
-<!--                    <p2>Código CV: <%= codigo_CV %> Código Histórico: <%= codigo_Hist %> <br /></p2>-->
+<!--                <p2>Código CV: <%= codigo_CV %> Código Histórico: <%= codigo_Hist %> <br /></p2>-->
                     <p2>E-mail: <%= email %> <br /></p2>   
                     </p>		
 
@@ -104,7 +110,7 @@
     if ( (vinculos != null) && (vinculos.size() != 0)){
         
         %>
-                    <fieldset>
+            <fieldset>
             <legend>Pesquisas de <%=nome%></legend>
             <table border="1">
                 <tr>
@@ -129,14 +135,116 @@
                          <td><a href=pesquisa.jsp?visualizar=projeto&id=<%= projeto.getId()%>>Visualizar Projeto</a></td>
       
                     </tr>        
-<%                      }   
+<%
+    }   
 %>          </table>    
             </fieldset>
-<% }
+<%
+    } // fecha vínculos
+
+ if(nusp_logado.equals(nusp)){
 %>
 
-<br/> 
+<a class="button" href="perfilAluno.jsp?action=editarPerfil&UserId=<%= id%>"> Editar Perfil </a>
 
+<%
+ } //só mostra o botão editar se o nusp logado corresponder ao do perfil %>
+
+<%
+       } //mostra perfil do aluno
+%>
+
+<!-- edita o perfil do aluno -->
+<%          if(action.equals("editarPerfil")) {
+   
+%>
+    <article>
+        <h1>Editar</h1>
+        <fieldset>
+             <legend>Modifique seus dados cadastrais:</legend>
+             <form method="post">
+                 
+                 <p><label for="text">Nome:</label>
+                     <input type="text" name="nome" value="<%= nome%>"/><br /></p>
+                 
+                 <p><label for="text">Sobrenome:</label>
+                     <input type="text" name="sobrenome" value="<%= sobrenome%>"/><br /></p>
+                 
+                 <p><label for="text">E-mail</label>
+                     <input type ="text" name="email" value=<%= email%> /><br/></p>
+                 
+                 <p><label for="text">Institui&ccedil;&atilde;o:</label>
+                     <select name="instituicao">
+                        <option value="<%= instituicao%>" selected="selected" />
+                        <option value="POLI">Escola Polit&eacute;cnica</option>
+                        <option value="IF">Insituto de F&iacute;sica</option>
+                     </select></p>
+                 
+                 <p><label2 for="text">Link do curr&iacute;culo Lattes:</label2>
+                     <input type="text" name="linkLattes" value="<%=link_lattes%>" size="80"/><br /></p>
+                            
+                 <p><label2 for="text">C&oacute;digo do hist&oacute;rico:</label2>
+                     <input type="text" name="codHist" value="<%=codigo_Hist%>"/><br /></p>
+                            
+
+                 <p><INPUT type="submit" class="formbutton" value="Atualizar">
+                    <INPUT type="reset" class="formbutton" value="Resetar"></p>
+                    <input type="hidden" name="atualiza" value="true" />
+             </form>
+
+        </fieldset>
+    </article>
+
+<%
+    } // editarPerfil
+%>
+
+<!--   atualiza os valores -->
+<%
+    if ("true".equals(request.getParameter("atualiza")))  {
+        
+        String email2        = request.getParameter("email");
+        String nome2         = request.getParameter("nome");  
+        String sobrenome2    = request.getParameter("sobrenome");
+        String link_lattes2  = request.getParameter("linkLattes");
+        String instituicao2  = request.getParameter("instituicao");
+        String codigo_Hist2  = request.getParameter("codHist");
+        
+        transacoes.Usuario tu = new transacoes.Usuario();
+        data.UsuarioDO usuario = tu.buscar(id);
+        
+        usuario.setNome(nome2);
+        usuario.setSobrenome(sobrenome2);
+        usuario.setEmail(email2);
+        
+        if(tu.atualizar(usuario)) {
+            
+            aluno.setEmail(email2);
+            aluno.setNome(nome2);
+            aluno.setSobrenome(sobrenome2);
+            aluno.setLattes(link_lattes2);
+            aluno.setInstituicao(instituicao2);
+            aluno.setHist(codigo_Hist2);
+            
+            if (al.atualizar(aluno)){
+                %>
+                    <script type="text/JavaScript"> alert("Atualização dos dados realizada com sucesso!"); </script>
+                    <%
+            }
+            else { //caso de não atualizar aluno
+            %>
+                <script type="text/JavaScript"> alert("Erro na atualização: aluno!"); </script>
+            <%
+            }
+        } else { // caso a atualização do usuario não seja completada
+        %>
+            <script type="text/JavaScript"> alert("Erro na atualização:usuario!"); </script>
+        <%
+        }
+        response.sendRedirect("visualizarPerfil.jsp");
+    } //fim da atualização
+%>
+                    <br/>
                     <img src="images/usp_relogio_red.jpg" class="resize" alt="" />
         	
                 <footer class="clear">

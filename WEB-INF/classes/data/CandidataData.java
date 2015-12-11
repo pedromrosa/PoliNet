@@ -24,6 +24,22 @@ public class CandidataData{
     System.out.println("apagado com sucesso");
   } // excluir 
 
+  public CandidataDO verifica_aluno(int id_aluno, int id_projeto, Transacao tr) throws Exception {
+      Connection con = tr.obterConexao();
+      String sql = "select * from candidata where id_aluno like ? AND id_projeto like ?";
+      PreparedStatement ps = con.prepareStatement(sql);
+      ps.setInt(1, id_aluno);
+      ps.setInt(2, id_projeto);
+      ResultSet rs = ps.executeQuery();
+      rs.next();
+      
+      CandidataDO candidata = new CandidataDO();
+      candidata.setIdAluno (rs.getInt("id_aluno"));
+      candidata.setIdProjeto(rs.getInt("id_projeto"));
+      
+      return candidata;
+  }
+    
   public Vector procurar_alunos(int id_projeto, Transacao tr) throws Exception {
     Connection con = tr.obterConexao();
     String sql = "select * from candidata where id_projeto=?";

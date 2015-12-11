@@ -84,8 +84,10 @@
                     else {
                         if (usuario.getNusp().equals(usuario2.getNusp())){
 %>
-            <script type="text/JavaScript"> alert("A senha procurada é: <%= usuario.getSenha() %>");</script>
-<%                      }
+<a class="button" href="mailto:<%=usuario.getEmail()%>&subject=Recuperar%20senha&body=Senha%20cadastrada:%20<%=usuario.getSenha()%>">Clique aqui para enviar a senha cadastrada para o seu e-mail</a>
+<!--<script type="text/JavaScript"> alert("A senha procurada é: <%= usuario.getSenha() %>");</script>-->
+<%
+                        }
                         else{
 %>
             <script type="text/JavaScript"> alert("O e-mail e número USP não conferem!");</script>

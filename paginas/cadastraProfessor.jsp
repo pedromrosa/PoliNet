@@ -37,7 +37,7 @@
 			  
                     <fieldset>
                         <legend>Informe seus dados cadastrais</legend>
-                        <FORM action="usuario.jsp" method="post">
+                        <FORM method="post">
 				
                             <p><label for="text">Nome:</label>
                             <input type="text" name="nome" value=""/><br /></p>
@@ -54,15 +54,15 @@
                             <p><label for="text">Institui&ccedil;&atilde;o:</label>
                                 <select name="instituicao">
                                     <option value="" selected="selected" />
-                                    <option value="1">Escola Polit&eacute;cnica</option>
-                                    <option value="2">Insituto de F&iacute;sica</option>
+                                    <option value="POLI">Escola Polit&eacute;cnica</option>
+                                    <option value="IF">Insituto de F&iacute;sica</option>
                                 </select></p>
 	
                             <p><label for="text">Departamento:</label>
                                 <select name="departamento">
                                     <option value="" selected="selected" />
-                                    <option value="1">PMR</option>
-                                    <option value="2">PME</option>
+                                    <option value="PMR">PMR</option>
+                                    <option value="PME">PME</option>
                                 </select></p>
 				  
                             <p><label for="text">Laborat&oacute;rio:</label>
